@@ -35,6 +35,8 @@ Route::group(['middleware' => 'web'], function () {
 
     // Route to for user to reactivate their user deleted account.
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
+
+    Route::resource('/register_member', 'RegisterMemberController');
 });
 
 // Registered and Activated User Routes
@@ -89,6 +91,19 @@ Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () 
 
     // Route to upload user avatar.
     Route::post('avatar/upload', ['as' => 'avatar.upload', 'uses' => 'ProfilesController@upload']);
+
+    Route::resource('/members', 'MemberController');
+    Route::post('/members/{id}/approve', 'MemberController@approveMember');
+    Route::resource('/courses', 'CourseController');
+    Route::resource('/coachs', 'CoachController');
+    Route::resource('/dashboard', 'DashboardController');
+
+});
+
+// Registered, activated, and is member routes.
+Route::group(['middleware'=> ['auth', 'activated', 'role:member']], function () {
+
+    Route::resource('/member_card', 'RegisterMemberCardController');
 });
 
 // Registered, activated, and is admin routes.

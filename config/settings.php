@@ -42,4 +42,9 @@ return [
      */
     'reCaptchStatus' => env('ENABLE_RECAPTCHA', false),
 
+    /*
+     * Member Due Duration (month)
+     */
+    'memberDueDuration' => 24,
+
 ];

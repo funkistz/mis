@@ -12,7 +12,7 @@
 
             {{-- Branding Image --}}
             <a class="navbar-brand" href="{{ url('/') }}">
-                {!! config('app.name', Lang::get('titles.app')) !!}
+                MIS
             </a>
         </div>
 
@@ -22,17 +22,29 @@
                 @role('admin')
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Admin <span class="caret"></span>
+                            Menu <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
+                            <li {{ Request::is('dashboard') ? 'class=active' : null }}>{!! HTML::link(url('/dashboard'), 'Dashboard') !!}</li>
                             <li {{ Request::is('users', 'users/' . Auth::user()->id, 'users/' . Auth::user()->id . '/edit') ? 'class=active' : null }}>{!! HTML::link(url('/users'), Lang::get('titles.adminUserList')) !!}</li>
                             <li {{ Request::is('users/create') ? 'class=active' : null }}>{!! HTML::link(url('/users/create'), Lang::get('titles.adminNewUser')) !!}</li>
-                            <li {{ Request::is('themes','themes/create') ? 'class=active' : null }}>{!! HTML::link(url('/themes'), Lang::get('titles.adminThemesList')) !!}</li>
-                            <li {{ Request::is('logs') ? 'class=active' : null }}>{!! HTML::link(url('/logs'), Lang::get('titles.adminLogs')) !!}</li>
-                            <li {{ Request::is('php') ? 'class=active' : null }}>{!! HTML::link(url('/php'), Lang::get('titles.adminPHP')) !!}</li>
-                            <li {{ Request::is('routes') ? 'class=active' : null }}>{!! HTML::link(url('/routes'), Lang::get('titles.adminRoutes')) !!}</li>
+                            <li {{ Request::is('members') ? 'class=active' : null }}>{!! HTML::link(url('/members'), 'Members') !!}</li>
+                            <li {{ Request::is('courses') ? 'class=active' : null }}>{!! HTML::link(url('/courses'), 'Courses') !!}</li>
+                            <li {{ Request::is('coachs') ? 'class=active' : null }}>{!! HTML::link(url('/coachs'), 'Coach') !!}</li>
                         </ul>
                     </li>
+                @endrole
+                @role('member')
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                          Member <span class="caret"></span>
+                      </a>
+                      @if(!empty(auth()->user()->activated))
+                      <ul class="dropdown-menu" role="menu">
+                          <li {{ Request::is('member_card/create') ? 'class=active' : null }}>{!! HTML::link(url('/member_card/create'), 'Member card registration') !!}</li>
+                      </ul>
+                      @endif
+                  </li>
                 @endrole
             </ul>
 
@@ -41,7 +53,8 @@
                 {{-- Authentication Links --}}
                 @if (Auth::guest())
                     <li><a href="{{ route('login') }}">{!! trans('titles.login') !!}</a></li>
-                    <li><a href="{{ route('register') }}">{!! trans('titles.register') !!}</a></li>
+                    <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
+                    <li><a href="{{ route('register_member.index') }}">Member Registration</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

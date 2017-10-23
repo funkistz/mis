@@ -24,6 +24,8 @@
 
         {{-- Styles --}}
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css')}}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('assets/select2/css/select2-bootstrap.min.css')}}" type="text/css" />
 
         @yield('template_linked_css')
 
@@ -58,11 +60,7 @@
 
             @include('partials.nav')
 
-            <div class="container">
-
-                @include('partials.form-status')
-
-            </div>
+            @include('partials.form-status')
 
             @yield('content')
 
@@ -70,6 +68,7 @@
 
         {{-- Scripts --}}
         <script src="{{ mix('/js/app.js') }}"></script>
+        <script src="{{asset('assets/select2/js/select2.full.min.js')}}"></script>
         {!! HTML::script('//maps.googleapis.com/maps/api/js?key='.env("GOOGLEMAPS_API_KEY").'&libraries=places&dummy=.js', array('type' => 'text/javascript')) !!}
 
         @yield('footer_scripts')

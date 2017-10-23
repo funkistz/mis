@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
+use Lecturize\Addresses\Traits\HasAddresses;
 
 class User extends Authenticatable
 {
     use HasRoleAndPermission;
     use Notifiable;
     use SoftDeletes;
+    use HasAddresses;
 
     /**
      * The database table used by the model.
@@ -34,6 +36,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'userable_id',
+        'userable_type',
+        'username',
         'name',
         'first_name',
         'last_name',
@@ -64,6 +69,14 @@ class User extends Authenticatable
     protected $dates = [
         'deleted_at',
     ];
+
+    /**
+     * Get all of the owning userable models.
+     */
+    public function userable()
+    {
+        return $this->morphTo();
+    }
 
     /**
      * Build Social Relationships.

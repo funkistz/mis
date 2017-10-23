@@ -24,7 +24,9 @@
         "socialiteproviders/generators": "^2.0",
         "socialiteproviders/instagram": "^3.0",
         "socialiteproviders/twitch": "^3.0",
-        "socialiteproviders/youtube": "^3.0"
+        "socialiteproviders/youtube": "^3.0",
+        "lecturize/laravel-addresses": "dev-master",
+        "khill/lavacharts": "~3.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

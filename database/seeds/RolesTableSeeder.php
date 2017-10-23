@@ -13,6 +13,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        Role::truncate();
         /*
          * Add Roles
          *
@@ -35,12 +36,48 @@ class RolesTableSeeder extends Seeder
             ]);
         }
 
-        if (Role::where('slug', '=', 'unverified')->first() === null) {
+        if (Role::where('slug', '=', 'staff')->first() === null) {
             $userRole = Role::create([
-                'name'        => 'Unverified',
-                'slug'        => 'unverified',
-                'description' => 'Unverified Role',
-                'level'       => 0,
+                'name'        => 'Staff',
+                'slug'        => 'staff',
+                'description' => 'Staff Role',
+                'level'       => 4,
+            ]);
+        }
+
+        if (Role::where('slug', '=', 'officer')->first() === null) {
+            $userRole = Role::create([
+                'name'        => 'Officer',
+                'slug'        => 'officer',
+                'description' => 'Officer Role',
+                'level'       => 3,
+            ]);
+        }
+
+        if (Role::where('slug', '=', 'co_officer')->first() === null) {
+            $userRole = Role::create([
+                'name'        => 'Co-Curriculumn Officer',
+                'slug'        => 'co_officer',
+                'description' => 'Co-Curriculumn Officer Role',
+                'level'       => 2,
+            ]);
+        }
+
+        if (Role::where('slug', '=', 'member')->first() === null) {
+            $userRole = Role::create([
+                'name'        => 'Member',
+                'slug'        => 'member',
+                'description' => 'Member Role',
+                'level'       => 1,
+            ]);
+        }
+
+        if (Role::where('slug', '=', 'coach')->first() === null) {
+            $userRole = Role::create([
+                'name'        => 'Coach',
+                'slug'        => 'coach',
+                'description' => 'Coach Role',
+                'level'       => 1,
             ]);
         }
     }

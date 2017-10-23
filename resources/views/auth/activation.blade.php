@@ -12,9 +12,7 @@
 					<div class="panel-heading">{{ Lang::get('titles.activation') }}</div>
 					<div class="panel-body">
 						<p>{{ Lang::get('auth.regThanks') }}</p>
-						<p>{{ Lang::get('auth.anEmailWasSent',['email' => $email, 'date' => $date ] ) }}</p>
-						<p>{{ Lang::get('auth.clickInEmail') }}</p>
-						<p><a href='/activation' class="btn btn-primary">{{ Lang::get('auth.clickHereResend') }}</a></p>
+						<p>Please wait until your membership account has been activate</p>
 					</div>
 				</div>
 			</div>
