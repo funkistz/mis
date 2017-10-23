@@ -16,6 +16,7 @@ class AlterTableUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->integer('userable_id')->nullable()->after('id');
             $table->string('userable_type')->nullable()->after('userable_id');
+            $table->string('username')->nullable()->after('last_name');
         });
     }
 
@@ -29,6 +30,7 @@ class AlterTableUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('userable_id');
             $table->dropColumn('userable_type');
+            $table->dropColumn('username');
         });
     }
 }
