@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Khill\Lavacharts\Lavacharts;
 use App\Models\Member;
+use App\Models\Course;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -18,11 +19,13 @@ class DashboardController extends Controller
     {
         $column_chart_data = $this->getMemberMonthData();
 
+        $course = Course::withCount('members')->get();
+
         $lava = new Lavacharts;
 
-        $reasons = $lava->DataTable();
+        $member_data = $lava->DataTable();
 
-        $reasons->addStringColumn('Month')
+        $member_data->addStringColumn('Month')
                 ->addNumberColumn('Member')
                 ->addRow(['JAN',  $column_chart_data[1]])
                 ->addRow(['FEB',  $column_chart_data[2]])
@@ -37,11 +40,18 @@ class DashboardController extends Controller
                 ->addRow(['NOV',  $column_chart_data[11]])
                 ->addRow(['DEC',  $column_chart_data[12]]);
 
+        $course_data = $lava->DataTable();
+        $course_data->addStringColumn('Course')->addNumberColumn('Member');
 
-        $donutchart = $lava->ColumnChart('columnchart', $reasons, []);
-        $barchart = $lava->BarChart('barchart', $reasons, []);
-        $areachart = $lava->AreaChart('areachart', $reasons, []);
-        $piechart = $lava->PieChart('piechart', $reasons, []);
+        foreach ($course as $key => $value) {
+            $course_data->addRow([$value->name,  $value->members_count]);
+        }
+
+        $column = $lava->ColumnChart('columnchart', $member_data, []);
+        $areachart = $lava->AreaChart('areachart', $member_data, []);
+        $piechart = $lava->PieChart('piechart', $member_data, []);
+
+        $coursechart = $lava->ColumnChart('coursechart', $course_data, []);
 
         $data = [
           'lava' => $lava

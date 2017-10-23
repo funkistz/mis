@@ -74,6 +74,19 @@
                   </div>
                 </div>
             </div>
+
+            <div class="col-md-12" id="coursechart">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4>Number of members per course</h4>
+                  </div>
+                  <div class="panel-body">
+                    <div id="poll_div"></div>
+                    <div id="chart-div4"></div>
+                    {!! $lava->render('ColumnChart', 'coursechart', 'chart-div4') !!}
+                  </div>
+                </div>
+            </div>
         </div>
     </div>
 
