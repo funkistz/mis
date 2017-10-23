@@ -13,7 +13,6 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::statement('SET FOREIGN_KEY_CHECKS = 0'); // disable foreign key constraints
         Role::truncate();
         /*
          * Add Roles
@@ -81,7 +80,5 @@ class RolesTableSeeder extends Seeder
                 'level'       => 1,
             ]);
         }
-
-        \DB::statement('SET FOREIGN_KEY_CHECKS = 1'); // enable foreign key constraints
     }
 }
