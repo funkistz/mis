@@ -26,7 +26,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         if ($user->isAdmin()) {
-            return view('dashboard.index');
+            return redirect( url('dashboard') );
         }
 
         return view('pages.user.home');
