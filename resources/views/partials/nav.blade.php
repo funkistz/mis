@@ -11,8 +11,8 @@
             </button>
 
             {{-- Branding Image --}}
-            <a class="navbar-brand" href="{{ url('/') }}">
-                MIS
+            <a class="navbar-brand padding-xs" href="{{ url('/') }}">
+                <img class="img-responsive" style="height:40px;" src="{{ asset('images/logo.png') }}">
             </a>
         </div>
 
