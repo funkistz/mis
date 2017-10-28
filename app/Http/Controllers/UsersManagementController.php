@@ -133,7 +133,7 @@ class UsersManagementController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $roles = Role::where('level', '!=' ,1)->get();
+        $roles = Role::where('level','!=' ,1)->get();
 
         foreach ($user->roles as $user_role) {
             $currentRole = $user_role;
