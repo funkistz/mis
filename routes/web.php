@@ -13,9 +13,6 @@
 |
 */
 
-// Homepage Route
-Route::get('/', 'WelcomeController@welcome')->name('welcome');
-
 // Authentication Routes
 Auth::routes();
 
@@ -58,6 +55,9 @@ Route::group(['middleware' => ['auth', 'activated']], function () {
 
 // Registered, activated, and is current user routes.
 Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () {
+
+    // Homepage Route
+    Route::get('/', 'DashboardController@index')->name('welcome');
 
     // User Profile and Account Routes
     Route::resource(

@@ -24,6 +24,7 @@
 
         {{-- Styles --}}
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/isispa.css')}}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css')}}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('assets/select2/css/select2-bootstrap.min.css')}}" type="text/css" />
 
