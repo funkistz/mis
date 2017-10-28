@@ -38,6 +38,19 @@
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    background-color: #ff6402;
+}
+
+.panel{
+  border: 0px;
+}
+
+.panel-default > .panel-heading{
+  background-color: #ff6402;
+  color: #ffffff;
+}
+
 .padding-xs { padding: .25em; }
 .padding-sm { padding: .5em; }
 .padding-md { padding: 1em; }
