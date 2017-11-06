@@ -241,6 +241,7 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'Form'         => \Collective\Html\FormFacade::class,
+        'Forms'        => App\Helpers\Forms::class,
         'HTML'         => \Collective\Html\HtmlFacade::class,
         'Socialite'    => Laravel\Socialite\Facades\Socialite::class,
         'Input'        => Illuminate\Support\Facades\Input::class,

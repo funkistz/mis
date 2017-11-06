@@ -91,6 +91,7 @@
                                                     <i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Edit</span><span class="hidden-xs hidden-sm hidden-md"> User</span>
                                                 </a>
                                             </td>
+                                            @role(['admin', 'coofficer'])
                                             <td>
                                               @if(empty($user->activated))
                                               {!! Form::open(array('url' => 'members/' . $user->id . '/approve', 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Approve')) !!}
@@ -98,6 +99,7 @@
                                               {!! Form::close() !!}
                                               @endif
                                             </td>
+                                            @endrole
                                         </tr>
                                     @endforeach
                                 </tbody>

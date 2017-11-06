@@ -15,9 +15,26 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $column_chart_data = $this->getMemberMonthData();
+        if(empty($request['year'])){
+          $request['year'] = Carbon::now()->year;
+        }
+
+        $column_chart_data = $this->getMemberMonthData($request['year']);
+
+        $members = Member::whereHas('user', function ($query) {
+            $query->where('activated', true);
+        })->get()->pluck('created_at', 'created_at');
+
+        $year_selection = collect();
+
+        foreach ($members as $key => $value) {
+
+          $year_convert = $value->format('Y');
+
+          $year_selection->put($year_convert, $year_convert);
+        }
 
         $course = Course::withCount('members')->get();
 
@@ -54,7 +71,9 @@ class DashboardController extends Controller
         $coursechart = $lava->ColumnChart('coursechart', $course_data, []);
 
         $data = [
-          'lava' => $lava
+          'lava' => $lava,
+          'year' => $request['year'],
+          'year_selection' => $year_selection->toArray()
         ];
 
         return view('dashboard.index')->with($data);
@@ -126,11 +145,16 @@ class DashboardController extends Controller
         //
     }
 
-    public function getMemberMonthData(){
+    public function getMemberMonthData($year){
+
+        if(empty($year)){
+          $year = Carbon::now()->year;
+        }
+
         $members = Member::whereHas('user', function ($query) {
             $query->where('activated', true);
         })
-        ->whereYear('created_at', '2017')
+        ->whereYear('created_at', $year)
         ->select('id', 'created_at')
         ->get()
         ->groupBy(function($date) {

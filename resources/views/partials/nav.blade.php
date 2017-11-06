@@ -19,18 +19,28 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             {{-- Left Side Of Navbar --}}
             <ul class="nav navbar-nav">
-                @role('admin')
+                @role(['admin', 'staff','officer', 'coofficer', 'coach'])
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             Menu <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li {{ Request::is('dashboard') ? 'class=active' : null }}>{!! HTML::link(url('/dashboard'), 'Dashboard') !!}</li>
+
+                            @role(['admin'])
                             <li {{ Request::is('users', 'users/' . Auth::user()->id, 'users/' . Auth::user()->id . '/edit') ? 'class=active' : null }}>{!! HTML::link(url('/users'), Lang::get('titles.adminUserList')) !!}</li>
                             <li {{ Request::is('users/create') ? 'class=active' : null }}>{!! HTML::link(url('/users/create'), Lang::get('titles.adminNewUser')) !!}</li>
+                            @endrole
+
+                            @role(['admin', 'staff', 'officer', 'coofficer'])
                             <li {{ Request::is('members') ? 'class=active' : null }}>{!! HTML::link(url('/members'), 'Members') !!}</li>
+                            @endrole
+                            @role(['admin', 'staff', 'officer'])
                             <li {{ Request::is('courses') ? 'class=active' : null }}>{!! HTML::link(url('/courses'), 'Courses') !!}</li>
+                            @endrole
+                            @role(['admin', 'coofficer'])
                             <li {{ Request::is('coachs') ? 'class=active' : null }}>{!! HTML::link(url('/coachs'), 'Coach') !!}</li>
+                            @endrole
                         </ul>
                     </li>
                 @endrole

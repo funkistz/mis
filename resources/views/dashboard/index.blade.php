@@ -60,12 +60,22 @@
               <a href="#linechart" id="toggle-linechart" type="button" class="btn btn-primary">Line Chart</a>
               <a href="#piechart" id="toggle-piechart" type="button" class="btn btn-primary">Pie Chart</a>
             </div>
+            <div class="pull-right form-horizontal">
+              <form id="form_filter_year" method="get" action="{{ url('dashboard') }}">
+                <div class="form-group required">
+                  <label class="col-md-4 control-label">Year</label>
+                  <div class="col-md-8">
+                  {!! Forms::dropdown('year', $year_selection, $year) !!}
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
 
             <div class="col-md-12" id="barchart">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Number of activated student registered per month (2017)</h4>
+                    <h4>Number of activated student registered per month ({{ $year }})</h4>
                   </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
@@ -141,6 +151,11 @@
       $('#linechart').addClass('hide');
       $('#piechart').addClass('hide');
     }
+
+    $('[name="year"]').on('change', function(){
+      $('#form_filter_year').submit();
+    });
+
     </script>
 
     @include('scripts.delete-modal-script')
