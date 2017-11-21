@@ -33,7 +33,9 @@ class MemberCard extends Model
         'blood_type',
         'rank_id',
         'induction',
-        'due_date'
+        'due_date',
+        'prefix',
+        'postfix'
     ];
 
     protected $dates = [

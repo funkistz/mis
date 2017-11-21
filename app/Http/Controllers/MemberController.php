@@ -9,6 +9,7 @@ use Validator;
 use App\Traits\CaptureIpTrait;
 use App\Models\Course;
 use App\Models\Profile;
+use App\Models\Coach;
 
 class MemberController extends Controller
 {
@@ -17,10 +18,57 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $status = @$request->get('status');
+        $coach = @$request->get('coach');
+
+        if(isset($status)){
+          $users = User::where([
+            ['userable_type', 'App\Models\Member'],
+            ['activated', $status]
+          ])->get();
+
+          if($status == 0){
+            $member_type = 'Member That Waiting For Approval';
+          }else{
+            $member_type = 'Approved Member';
+          }
+        }else if(isset($coach)){
+
+          $user_before = User::where([
+            ['userable_type', 'App\Models\Member']
+          ])->get();
+          $users = collect();
+
+          if($coach == 0){
+
+            foreach ($user_before as $key => $user) {
+              if($user->userable->coaches->count() == 0){
+                $users->push($user);
+              }
+            }
+
+            $member_type = 'Member Without Coach';
+
+          }else{
+
+            foreach ($user_before as $key => $user) {
+              if($user->userable->coaches->count() > 0){
+                $users->push($user);
+              }
+            }
+
+            $member_type = 'Member With Coach';
+          }
+        }else{
+          $users = User::where('userable_type', 'App\Models\Member')->get();
+          $member_type = 'Members';
+        }
+
         $data = [
-          'users' => User::where('userable_type', 'App\Models\Member')->get(),
+          'users' => $users,
+          'member_type' => $member_type,
           'roles' => Role::all()
         ];
 
@@ -76,11 +124,14 @@ class MemberController extends Controller
     {
         $user = User::findOrFail($id);
         $user_course = $user->userable->courses->pluck('id')->toArray();
+        $user_coach = $user->userable->coaches->pluck('id')->toArray();
 
         $data = [
             'user' => $user,
             'user_course' => @$user_course,
-            'course' => Course::all()->pluck('name','id')->toArray()
+            'user_coach' => @$user_coach,
+            'course' => Course::all()->pluck('name','id')->toArray(),
+            'coach' => Coach::join('users', 'coaches.id', '=', 'users.userable_id')->select('coaches.id', 'users.name')->pluck('name','id')->toArray()
         ];
 
         return view('member.edit')->with($data);
@@ -140,6 +191,13 @@ class MemberController extends Controller
         if(!empty($request->course)){
           foreach ($request->course as $course) {
             $member->courses()->attach($course);
+          }
+        }
+
+        $member->coaches()->detach();
+        if(!empty($request->coach)){
+          foreach ($request->coach as $coach) {
+            $member->coaches()->attach($coach);
           }
         }
 

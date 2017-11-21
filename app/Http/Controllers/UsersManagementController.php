@@ -27,12 +27,21 @@ class UsersManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $role = @$request->get('role');
+        if(!empty($role)){
+          $users = User::whereHas('roles', function ($query) use($role) {
+              $query->where('slug', $role);
+          })->get();
+          $role_name = ucfirst($role);
+        }else{
+          $users = User::all();
+          $role_name = 'User';
+        }
         $roles = Role::all();
 
-        return View('usersmanagement.show-users', compact('users', 'roles'));
+        return View('usersmanagement.show-users', compact('users', 'roles', 'role_name'));
     }
 
     /**

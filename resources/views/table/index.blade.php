@@ -26,7 +26,6 @@
 
 @section('content')
     <div class="container">
-
         <div class="row">
 
           <div class="col-md-12 margin-bottom-lg">
@@ -55,70 +54,56 @@
             </div>
           </div>
 
-          <!-- change based on role  -->
-          @role(['admin'])
-          @include('partials.admin-dashboard-box')
-          @endrole
 
-          @role(['officer'])
-          @include('partials.officer-dashboard-box')
-          @endrole
+          <div class="col-md-12" id="barchart">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4>Sispa's Member</h4>
+                </div>
+                <div class="panel-body">
+                  <div class="table-responsive users-table">
+                      <table class="table table-striped table-condensed data-table">
+                          <thead>
+                              <tr>
+                                  <th>ID</th>
+                                  <th>Name</th>
+                                  <th>Gender</th>
+                                  <th>Race</th>
+                                  <th>DOB</th>
+                                  <th>POB</th>
+                                  <th>Nric</th>
+                                  <th>Phone</th>
+                                  <th>Education Skill</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              @foreach($users as $user)
+                              <tr>
+                                  <td>{{ $user->id }}</td>
+                                  <td>{{ $user->name }}</td>
+                                  <td>{{ $user->userable->gender() }}</td>
+                                  <td>{{ $user->userable->race->name }}</td>
+                                  <td>{{ $user->userable->date_of_birth->format('d/m/Y') }}</td>
+                                  <td>{{ $user->userable->place_of_birth }}</td>
+                                  <td>{{ $user->userable->nric }}</td>
+                                  <td>{{ $user->userable->phone_1 }}</td>
+                                  <td></td>
+                              </tr>
+                              @endforeach
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+          </div>
 
-          @role(['coofficer'])
-          @include('partials.coofficer-dashboard-box')
-          @endrole
+      </div>
+    </div>
 
-          @role(['staff'])
-          @include('partials.staff-dashboard-box')
-          @endrole
-
-          @role(['admin'])
-          @include('partials.task-dashboard')
-          @endrole
-
-          @role(['admin'])
-          @include('partials.notification-dashboard')
-          @endrole
-
-          @role(['staff'])
-          @include('partials.calendar-dashboard')
-          @endrole
-
-          @role(['staff'])
-          @include('partials.news-dashboard')
-          @endrole
-
-    @include('modals.modal-delete')
 
 @endsection
 
 @section('footer_scripts')
-
-    <script>
-    $('#toggle-barchart').click(function(){
-      hideAllChart();
-      $('#barchart').removeClass('hide');
-    })
-    $('#toggle-piechart').click(function(){
-      hideAllChart();
-      $('#piechart').removeClass('hide');
-    })
-    $('#toggle-linechart').click(function(){
-      hideAllChart();
-      $('#linechart').removeClass('hide');
-    })
-
-    function hideAllChart(){
-      $('#barchart').addClass('hide');
-      $('#linechart').addClass('hide');
-      $('#piechart').addClass('hide');
-    }
-
-    $('[name="year"]').on('change', function(){
-      $('#form_filter_year').submit();
-    });
-
-    </script>
 
     @include('scripts.delete-modal-script')
     @include('scripts.save-modal-script')

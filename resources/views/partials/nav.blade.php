@@ -41,6 +41,10 @@
                             @role(['admin', 'coofficer'])
                             <li {{ Request::is('coachs') ? 'class=active' : null }}>{!! HTML::link(url('/coachs'), 'Coach') !!}</li>
                             @endrole
+                            @role(['officer'])
+                            <li {{ Request::is('report') ? 'class=active' : null }}>{!! HTML::link(route('report.index'), 'Report') !!}</li>
+                            <li {{ Request::is('table') ? 'class=active' : null }}>{!! HTML::link(route('table.index'), 'Table') !!}</li>
+                            @endrole
                         </ul>
                     </li>
                 @endrole
@@ -51,7 +55,12 @@
                       </a>
                       @if(!empty(auth()->user()->activated))
                       <ul class="dropdown-menu" role="menu">
+                        @can('create', App\Models\MemberCard::class)
                           <li {{ Request::is('member_card/create') ? 'class=active' : null }}>{!! HTML::link(url('/member_card/create'), 'Member card registration') !!}</li>
+                        @else
+                          <li {{ Request::is('member_card') ? 'class=active' : null }}>{!! HTML::link(url('/member_card'), 'Member card') !!}</li>
+                        @endcan
+                        <li {{ Request::is('member_courses') ? 'class=active' : null }}>{!! HTML::link(url('/member_courses'), 'Courses') !!}</li>
                       </ul>
                       @endif
                   </li>

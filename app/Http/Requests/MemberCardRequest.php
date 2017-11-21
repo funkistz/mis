@@ -24,8 +24,7 @@ class MemberCardRequest extends FormRequest
     public function rules()
     {
         return [
-            'blood_type' => 'required',
-            'rank_id' => 'required',
+            'blood_type' => 'required'
         ];
     }
 }

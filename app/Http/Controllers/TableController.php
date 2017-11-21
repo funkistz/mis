@@ -3,24 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Khill\Lavacharts\Lavacharts;
+use App\Models\User;
 use App\Models\Member;
-use App\Models\Course;
-use Carbon\Carbon;
 
-class DashboardController extends Controller
+class TableController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $data = [
+          'users' => User::where('userable_type', Member::class)->get()
         ];
 
-        return view('dashboard.index')->with($data);
+        return view('table.index')->with($data);
     }
 
     /**
@@ -88,5 +87,4 @@ class DashboardController extends Controller
     {
         //
     }
-
 }

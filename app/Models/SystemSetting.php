@@ -3,18 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Course extends Model
+class SystemSetting extends Model
 {
-    use SoftDeletes;
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'courses';
+    protected $table = 'system_settings';
 
     /**
      * The attributes that are not mass assignable.
@@ -30,20 +28,10 @@ class Course extends Model
      */
     protected $fillable = [
         'name',
-        'venue',
-        'date',
-        'slug',
+        'field',
+        'type',
+        'value',
         'description',
-        'is_active'
+        'is_active',
     ];
-
-    protected $dates = [
-        'date',
-        'deleted_at',
-    ];
-
-    public function members()
-    {
-        return $this->belongsToMany('App\Models\Member')->withPivot('accepted');
-    }
 }

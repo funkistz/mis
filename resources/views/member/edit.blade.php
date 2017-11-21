@@ -84,6 +84,18 @@
                 </div>
               </div>
 
+              <div class="form-group has-feedback row {{ $errors->has('coach[]') ? ' has-error ' : '' }}">
+                {!! Form::label('coach[]', 'coach', array('class' => 'col-md-3 control-label')); !!}
+                <div class="col-md-9">
+                  {!! Form::select('coach[]', $coach, $user_coach, array('multiple' => 'multiple','name' => 'coach[]', 'id' => 'coach', 'class' => 'form-control')) !!}
+                  @if ($errors->has('coach'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('coach') }}</strong>
+                    </span>
+                  @endif
+                </div>
+              </div>
+
               <div class="pw-change-container">
                 <div class="form-group has-feedback row">
                   {!! Form::label('password', trans('forms.create_user_label_password'), array('class' => 'col-md-3 control-label')); !!}
@@ -139,6 +151,7 @@
   <script>
   $(document).ready(function() {
       $('#course').select2();
+      $('#coach').select2();
   });
   </script>
   @include('scripts.delete-modal-script')

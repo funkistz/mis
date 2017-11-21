@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Khill\Lavacharts\Lavacharts;
-use App\Models\Member;
 use App\Models\Course;
-use Carbon\Carbon;
+use App\Models\Member;
 
-class DashboardController extends Controller
+class MemberCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+        $member = auth()->user()->userable;
+
         $data = [
+          'members' => $member
         ];
 
-        return view('dashboard.index')->with($data);
+        return view('member_course.index')->with($data);
     }
 
     /**
@@ -75,7 +76,13 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $member = Member::find( auth()->user()->userable->id );
+
+        $member->courses()->syncWithoutDetaching([
+          $id => ['accepted' => true]
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -88,5 +95,4 @@ class DashboardController extends Controller
     {
         //
     }
-
 }

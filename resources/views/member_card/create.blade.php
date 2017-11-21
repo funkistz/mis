@@ -32,20 +32,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('rank_id') ? ' has-error' : '' }}">
-                            <label for="rank_id" class="col-sm-4 control-label">Rank</label>
-                            <div class="col-sm-6">
-                                {!! Form::select('rank_id', $rank, null, ['placeholder' => 'Please choose...', 'class' => 'form-control']) !!}
-                                @if ($errors->has('rank_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('rank_id') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-
-
                         <div class="form-group margin-bottom-2">
                             <div class="col-sm-6 col-sm-offset-4">
                                 <button type="submit" class="btn btn-primary">

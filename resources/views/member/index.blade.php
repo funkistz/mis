@@ -33,7 +33,7 @@
 
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            Showing All Members
+                            Showing All {{ ucfirst($member_type) }}
                         </div>
                     </div>
 

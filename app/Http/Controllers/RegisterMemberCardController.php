@@ -7,9 +7,12 @@ use App\Models\Rank;
 use App\Models\MemberCard;
 use App\Http\Requests\MemberCardRequest;
 use Carbon\Carbon;
+use App\Traits\MemberCardTrait;
 
 class RegisterMemberCardController extends Controller
 {
+    use MemberCardTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +20,10 @@ class RegisterMemberCardController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+        ];
+
+        return view('member_card.show')->with($data);
     }
 
     /**
@@ -27,9 +33,9 @@ class RegisterMemberCardController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', MemberCard::class);
 
         $data = [
-          'rank' => Rank::all()->pluck('name','id')->toArray(),
         ];
 
         return view('member_card.create')->with($data);
@@ -43,15 +49,21 @@ class RegisterMemberCardController extends Controller
      */
     public function store(MemberCardRequest $request)
     {
-        $request['due_date'] = Carbon::now()->addMonths( config('settings.memberDueDuration') );
-        $request['card_no'] = $this->randomNumber(12);
+        $this->authorize('create', MemberCard::class);
 
-        //todo get member activated date
-        $request['induction'] = Carbon::now();
+        $request['due_date'] = $this->calculateDueDate();
+        $request['card_no'] = $this->incrementCardNumber();
+        $request['prefix'] = $this->cardPrefix();
+        $request['postfix'] = $this->cardPostfix();
 
-        // dd($request->all());
+        //to update get from setting
+        $request['rank_id'] = 1;
 
-        $member_card = MemberCard::create($request->only(['card_no', 'blood_type', 'rank_id', 'induction', 'due_date']));
+        $member_created_at = auth()->user()->userable->created_at->format("Y-m-d H:i:s");
+        $request['induction'] = $member_created_at;
+
+        // create
+        $member_card = MemberCard::create($request->only(['card_no', 'blood_type', 'rank_id', 'induction', 'due_date', 'prefix', 'postfix']));
 
         $member = auth()->user()->userable;
 

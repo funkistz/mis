@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Traits\ReportTrait;
 use Khill\Lavacharts\Lavacharts;
-use App\Models\Member;
-use App\Models\Course;
 use Carbon\Carbon;
 
-class DashboardController extends Controller
+class ReportController extends Controller
 {
+    use ReportTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -17,10 +18,31 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        if(empty($request['year'])){
+          $request['year'] = Carbon::now()->year;
+        }
+
+        $lava = new Lavacharts;
+
+        $member_data = $this->memberChart($request['year']);
+        $course_data = $this->courseChart($request['year']);
+        $year_selection = $this->getMemberYearSelection();
+
+        $column = $lava->ColumnChart('columnchart', $member_data, []);
+        $areachart = $lava->AreaChart('areachart', $member_data, []);
+        $piechart = $lava->PieChart('piechart', $member_data, []);
+
+        $coursechart = $lava->ColumnChart('coursechart', $course_data, []);
+        $lava->AreaChart('courseareachart', $course_data, []);
+        $lava->PieChart('coursepiechart', $course_data, []);
+
         $data = [
+          'lava' => $lava,
+          'year' => $request['year'],
+          'year_selection' => $year_selection->toArray()
         ];
 
-        return view('dashboard.index')->with($data);
+        return view('report.index')->with($data);
     }
 
     /**
@@ -88,5 +110,4 @@ class DashboardController extends Controller
     {
         //
     }
-
 }

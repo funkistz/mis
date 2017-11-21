@@ -97,6 +97,8 @@ Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () 
     Route::resource('/courses', 'CourseController');
     Route::resource('/coachs', 'CoachController');
     Route::resource('/dashboard', 'DashboardController');
+    Route::resource('/report', 'ReportController');
+    Route::resource('/table', 'TableController');
 
 });
 
@@ -104,6 +106,7 @@ Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () 
 Route::group(['middleware'=> ['auth', 'activated', 'role:member']], function () {
 
     Route::resource('/member_card', 'RegisterMemberCardController');
+    Route::resource('/member_courses', 'MemberCourseController');
 });
 
 // Registered, activated, and is admin routes.

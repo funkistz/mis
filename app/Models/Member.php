@@ -49,6 +49,7 @@ class Member extends Model
 
     protected $dates = [
         'deleted_at',
+        'date_of_birth'
     ];
 
     /**
@@ -62,6 +63,17 @@ class Member extends Model
     public function race()
     {
         return $this->belongsTo('App\Models\Race');
+    }
+
+    public function gender()
+    {
+        if($this->attributes['gender'] == 'm'){
+          return 'male';
+        }else if($this->attributes['gender'] == 'f'){
+          return 'female';
+        }else{
+          return 'unknown';
+        }
     }
 
     public function nationality()
@@ -81,7 +93,12 @@ class Member extends Model
 
     public function courses()
     {
-        return $this->belongsToMany('App\Models\Course');
+        return $this->belongsToMany('App\Models\Course')->withPivot('accepted');
+    }
+
+    public function coaches()
+    {
+        return $this->belongsToMany('App\Models\Coach');
     }
 
     public function memberCard()

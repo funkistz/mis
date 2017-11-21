@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Providers;
+use App\Models\MemberCard;
+use App\Models\Member;
+use App\Models\Course;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -13,6 +16,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        MemberCard::class => 'App\Policies\MemberCardPolicy',
+        Member::class => 'App\Policies\MemberPolicy',
+        Course::class => 'App\Policies\CoursePolicy',
     ];
 
     /**

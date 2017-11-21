@@ -33,7 +33,7 @@
 
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            Showing All Users
+                            Showing All {{ $role_name }}s
 
                             <div class="btn-group pull-right btn-group-xs">
 
