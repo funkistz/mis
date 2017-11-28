@@ -38,11 +38,13 @@
               </div>
             </div>
 
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
 
                 @include('panels.welcome-panel')
 
             </div>
+
+            @include('partials.news-dashboard',['col' => 12])
         </div>
     </div>
 

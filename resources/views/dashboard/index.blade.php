@@ -85,7 +85,7 @@
           @endrole
 
           @role(['staff'])
-          @include('partials.news-dashboard')
+          @include('partials.news-dashboard',['add_news' => true])
           @endrole
 
     @include('modals.modal-delete')

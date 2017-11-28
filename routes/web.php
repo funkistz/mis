@@ -99,6 +99,7 @@ Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () 
     Route::resource('/dashboard', 'DashboardController');
     Route::resource('/report', 'ReportController');
     Route::resource('/table', 'TableController');
+    Route::resource('/news', 'NewsController');
 
 });
 

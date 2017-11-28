@@ -45,6 +45,9 @@
                             <li {{ Request::is('report') ? 'class=active' : null }}>{!! HTML::link(route('report.index'), 'Report') !!}</li>
                             <li {{ Request::is('table') ? 'class=active' : null }}>{!! HTML::link(route('table.index'), 'Table') !!}</li>
                             @endrole
+                            @role(['staff'])
+                            <li {{ Request::is('news') ? 'class=active' : null }}>{!! HTML::link(route('news.index'), 'News') !!}</li>
+                            @endrole
                         </ul>
                     </li>
                 @endrole

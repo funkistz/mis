@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class MemberCard extends Model
+class News extends Model
 {
     use SoftDeletes;
 
@@ -14,7 +14,7 @@ class MemberCard extends Model
      *
      * @var string
      */
-    protected $table = 'member_cards';
+    protected $table = 'news';
 
     /**
      * The attributes that are not mass assignable.
@@ -29,22 +29,20 @@ class MemberCard extends Model
      * @var array
      */
     protected $fillable = [
-        'card_no',
-        'blood_type',
-        'rank_id',
-        'induction',
-        'due_date',
-        'prefix',
-        'postfix'
+        'slug',
+        'title',
+        'description',
+        'is_active',
+        'created_by',
+        'updated_by'
     ];
 
     protected $dates = [
         'deleted_at',
-        'induction',
     ];
 
-    public function member()
+    public function user()
     {
-        return $this->hasOne('App\Models\Member');
+        return $this->belongsTo('App\Models\User', 'created_by', 'id');
     }
 }

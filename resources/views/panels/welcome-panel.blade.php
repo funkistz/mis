@@ -27,8 +27,6 @@
 
     </div>
     <div class="panel-body">
-        <h2 class="lead">
             {{ trans('auth.loggedIn') }}
-        </h2>
     </div>
 </div>
