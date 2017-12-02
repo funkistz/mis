@@ -72,16 +72,18 @@
           @include('partials.staff-dashboard-box')
           @endrole
 
+          <!-- below box  -->
+
           @role(['admin'])
           @include('partials.task-dashboard')
           @endrole
 
-          @role(['admin'])
-          @include('partials.notification-dashboard')
-          @endrole
-
           @role(['staff'])
           @include('partials.calendar-dashboard')
+          @endrole
+
+          @role(['admin','officer', 'coofficer'])
+          @include('partials.news-dashboard', ['col' => 12])
           @endrole
 
           @role(['staff'])

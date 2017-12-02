@@ -182,17 +182,20 @@ class MemberController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
-        $user->detachAllRoles();
-        $user->attachRole($request->input('role'));
-        $user->updated_ip_address = $ipAddress->getClientIp();
-        $user->save();
 
-        $member->courses()->detach();
-        if(!empty($request->course)){
-          foreach ($request->course as $course) {
-            $member->courses()->attach($course);
-          }
-        }
+        ///PLEASE UPDATE CODE!!!!
+        // $course_id = $request->course->pluck(['accepted' => 0], 'id')->toArray();
+        // $member->courses()->sync($course_id);
+
+
+        // $member->courses()->detach();
+        // if(!empty($request->course)){
+        //   foreach ($request->course as $course) {
+        //     $member->courses()->attach([$course => [
+        //         'accepted' => 0
+        //     ]]);
+        //   }
+        // }
 
         $member->coaches()->detach();
         if(!empty($request->coach)){

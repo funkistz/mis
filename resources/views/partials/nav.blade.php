@@ -32,17 +32,19 @@
                             <li {{ Request::is('users/create') ? 'class=active' : null }}>{!! HTML::link(url('/users/create'), Lang::get('titles.adminNewUser')) !!}</li>
                             @endrole
 
-                            @role(['admin', 'staff', 'officer', 'coofficer'])
+                            @role(['staff', 'officer', 'coofficer'])
                             <li {{ Request::is('members') ? 'class=active' : null }}>{!! HTML::link(url('/members'), 'Members') !!}</li>
                             @endrole
-                            @role(['admin', 'staff', 'officer'])
+                            @role(['staff'])
                             <li {{ Request::is('courses') ? 'class=active' : null }}>{!! HTML::link(url('/courses'), 'Courses') !!}</li>
                             @endrole
-                            @role(['admin', 'coofficer'])
+                            @role(['coofficer'])
                             <li {{ Request::is('coachs') ? 'class=active' : null }}>{!! HTML::link(url('/coachs'), 'Coach') !!}</li>
                             @endrole
-                            @role(['officer'])
+                            @role(['staff', 'officer'])
                             <li {{ Request::is('report') ? 'class=active' : null }}>{!! HTML::link(route('report.index'), 'Report') !!}</li>
+                            @endrole
+                            @role(['officer'])
                             <li {{ Request::is('table') ? 'class=active' : null }}>{!! HTML::link(route('table.index'), 'Table') !!}</li>
                             @endrole
                             @role(['staff'])

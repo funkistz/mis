@@ -91,15 +91,34 @@ Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () 
 
     // Route to upload user avatar.
     Route::post('avatar/upload', ['as' => 'avatar.upload', 'uses' => 'ProfilesController@upload']);
-
-    Route::resource('/members', 'MemberController');
-    Route::post('/members/{id}/approve', 'MemberController@approveMember');
-    Route::resource('/courses', 'CourseController');
-    Route::resource('/coachs', 'CoachController');
+    
     Route::resource('/dashboard', 'DashboardController');
-    Route::resource('/report', 'ReportController');
-    Route::resource('/table', 'TableController');
-    Route::resource('/news', 'NewsController');
+
+    Route::group(['middleware' => ['role:staff|officer|coofficer']], function () {
+      Route::resource('/members', 'MemberController');
+      Route::post('/members/{id}/approve', 'MemberController@approveMember');
+    });
+
+    Route::group(['middleware' => ['role:staff|officer']], function () {
+      Route::resource('/courses', 'CourseController');
+    });
+
+    Route::group(['middleware' => ['role:staff']], function () {
+      Route::resource('/coachs', 'CoachController');
+    });
+
+
+    Route::group(['middleware' => ['role:staff|officer']], function () {
+      Route::resource('/report', 'ReportController');
+    });
+
+    Route::group(['middleware' => ['role:officer']], function () {
+      Route::resource('/table', 'TableController');
+    });
+
+    Route::group(['middleware' => ['role:staff']], function () {
+      Route::resource('/news', 'NewsController');
+    });
 
 });
 

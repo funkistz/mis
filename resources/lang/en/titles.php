@@ -2,7 +2,7 @@
 
 return [
 
-    'app'              => 'Laravel',
+    'app'              => 'iSiSPA',
     'app2'             => 'Laravel Auth 2.0',
     'home'             => 'Home',
     'login'            => 'Login',

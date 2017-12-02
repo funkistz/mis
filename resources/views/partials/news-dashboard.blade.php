@@ -19,6 +19,7 @@
         </div>
         <div class="media-body">
           <h4 class="media-heading">{{ $news->title }}
+            @role(['staff'])
             @if( auth()->user()->id == $news->created_by )
             <span class="text-right">
               {!! Form::open(array('route' => ['news.destroy', $news->id], 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Delete')) !!}
@@ -27,6 +28,7 @@
               {!! Form::close() !!}
             </span>
             @endif
+            @endrole
           </h4>
           <small>by {{ $news->user->name }}</small><br>
           {{ $news->description }}

@@ -88,7 +88,7 @@ class RegisterMemberController extends Controller
             ]
           ));
 
-          $user->attachRole(7);
+          $user->attachRole(ROLE_MEMBER);
 
           //Address
           $request['is_primary'] = 1;

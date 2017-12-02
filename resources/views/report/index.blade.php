@@ -56,13 +56,14 @@
           </div>
 
 
-          <div class="col-md-12">
+          <div class="col-md-12 hidden-print">
             <div class="btn-group" style="margin-bottom:20px;">
               <a href="#barchart" id="toggle-barchart" type="button" class="btn btn-primary">Bar Chart</a>
               <a href="#linechart" id="toggle-linechart" type="button" class="btn btn-primary">Line Chart</a>
               <a href="#piechart" id="toggle-piechart" type="button" class="btn btn-primary">Pie Chart</a>
             </div>
-            <div class="pull-right form-horizontal">
+            <button class="btn btn-default pull-right hidden-print" onclick="window.print()">Print</button>
+            <div class="pull-right form-horizontal margin-y-xs">
               <form id="form_filter_year" method="get" action="{{ url('report') }}">
                 <div class="form-group required">
                   <label class="col-md-4 control-label">Year</label>
@@ -87,8 +88,11 @@
                 </div>
             </div>
 
-            <div class="col-md-6" id="linechart">
+            <div class="col-md-12 hide" id="linechart">
                 <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4>Number of activated student registered per month ({{ $year }})</h4>
+                  </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
                     <div id="chart-div2"></div>
@@ -97,8 +101,11 @@
                 </div>
             </div>
 
-            <div class="col-md-6" id="piechart">
+            <div class="col-md-12 hide" id="piechart">
                 <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4>Number of activated student registered per month ({{ $year }})</h4>
+                  </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
                     <div id="chart-div3"></div>
@@ -107,7 +114,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12" id="coursechart">
+            <div class="col-md-12" id="barchart2">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h4>Number of members per course</h4>
@@ -120,8 +127,11 @@
                 </div>
             </div>
 
-            <div class="col-md-6" id="linechart">
+            <div class="col-md-12 hide" id="linechart2">
                 <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4>Number of members per course</h4>
+                  </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
                     <div id="chart-div5"></div>
@@ -130,8 +140,11 @@
                 </div>
             </div>
 
-            <div class="col-md-6" id="piechart">
+            <div class="col-md-12 hide" id="piechart2">
                 <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4>Number of members per course</h4>
+                  </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
                     <div id="chart-div6"></div>
@@ -152,6 +165,31 @@
 
     $('[name="year"]').on('change', function(){
       $('#form_filter_year').submit();
+    });
+
+    function hide_all_chart(){
+      $('#barchart').addClass('hide');
+      $('#linechart').addClass('hide');
+      $('#piechart').addClass('hide');
+      $('#barchart2').addClass('hide');
+      $('#linechart2').addClass('hide');
+      $('#piechart2').addClass('hide');
+    }
+
+    $('#toggle-barchart').on('click', function(){
+      hide_all_chart();
+      $('#barchart').removeClass('hide');
+      $('#barchart2').removeClass('hide');
+    });
+    $('#toggle-linechart').on('click', function(){
+      hide_all_chart();
+      $('#linechart').removeClass('hide');
+      $('#linechart2').removeClass('hide');
+    });
+    $('#toggle-piechart').on('click', function(){
+      hide_all_chart();
+      $('#piechart').removeClass('hide');
+      $('#piechart2').removeClass('hide');
     });
 
     </script>

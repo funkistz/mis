@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-  Showing Users
+  Report
 @endsection
 
 @section('template_linked_css')
@@ -58,6 +58,7 @@
           <div class="col-md-12" id="barchart">
               <div class="panel panel-default">
                 <div class="panel-heading">
+                  <button class="btn btn-default pull-right hidden-print" onclick="window.print()">Print</button>
                   <h4>Sispa's Member</h4>
                 </div>
                 <div class="panel-body">
@@ -73,7 +74,7 @@
                                   <th>POB</th>
                                   <th>Nric</th>
                                   <th>Phone</th>
-                                  <th>Education Skill</th>
+                                  <th>Education</th>
                               </tr>
                           </thead>
                           <tbody>
@@ -87,7 +88,7 @@
                                   <td>{{ $user->userable->place_of_birth }}</td>
                                   <td>{{ $user->userable->nric }}</td>
                                   <td>{{ $user->userable->phone_1 }}</td>
-                                  <td></td>
+                                  <td>{{ $user->userable->educationLevel->name }}</td>
                               </tr>
                               @endforeach
                           </tbody>

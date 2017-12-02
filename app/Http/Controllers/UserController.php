@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->isAdmin()) {
+        if (!$user->isMember()) {
             return redirect( url('dashboard') );
         }
 
