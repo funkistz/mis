@@ -78,7 +78,7 @@
             <div class="col-md-12" id="barchart">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Number of activated student registered per month ({{ $year }})</h4>
+                    <h4>Number of students registered per month</h4>
                   </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
@@ -91,7 +91,7 @@
             <div class="col-md-12 hide" id="linechart">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Number of activated student registered per month ({{ $year }})</h4>
+                    <h4>Number of students registered per month</h4>
                   </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
@@ -104,7 +104,7 @@
             <div class="col-md-12 hide" id="piechart">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Number of activated student registered per month ({{ $year }})</h4>
+                    <h4>Number of students registered per month</h4>
                   </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
@@ -117,7 +117,7 @@
             <div class="col-md-12" id="barchart2">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Number of members per course</h4>
+                    <h4>Number of participants per course</h4>
                   </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
@@ -130,7 +130,7 @@
             <div class="col-md-12 hide" id="linechart2">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Number of members per course</h4>
+                    <h4>Number of participants per course</h4>
                   </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>
@@ -143,7 +143,7 @@
             <div class="col-md-12 hide" id="piechart2">
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Number of members per course</h4>
+                    <h4>Number of participants per course</h4>
                   </div>
                   <div class="panel-body">
                     <div id="poll_div"></div>

@@ -38,7 +38,7 @@
     'value' => count(
       \DB::table('course_member')->where('accepted', 1)->get()
     ),
-    'title' => 'Member attend courses',
+    'title' => 'Members attend courses',
     'footer_link' => route('members.index', ['course' => 0]),
   ])
   @endcomponent
@@ -49,7 +49,7 @@
     'value' => count(
       \DB::table('course_member')->where('accepted', 0)->get()
     ),
-    'title' => 'Member not attend courses',
+    'title' => 'Members not attend courses',
     'footer_link' => route('members.index', ['course' => 0]),
   ])
   @endcomponent
@@ -60,7 +60,7 @@
     'value' => count(
       App\Models\Course::all()
     ),
-    'title' => 'Course',
+    'title' => 'Courses',
     'footer_link' => route('courses.index'),
   ])
   @endcomponent

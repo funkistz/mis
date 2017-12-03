@@ -31,7 +31,7 @@
           $query->where('slug', 'coofficer');
       })->get()
     ),
-    'title' => 'Cocurriculum Officer',
+    'title' => 'Co-curriculum Officer',
     'footer_link' => route('users', ['role' => 'coofficer']),
   ])
   @endcomponent

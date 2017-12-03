@@ -20,6 +20,7 @@
 
                         {{ csrf_field() }}
 
+                    
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <label for="name" class="col-sm-4 control-label">Username</label>
                             <div class="col-sm-6">
@@ -31,11 +32,12 @@
                                 @endif
                             </div>
                         </div>
-
+                        
+    
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-sm-4 control-label">Name</label>
                             <div class="col-sm-6">
-                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'First Name', 'id' => 'name']) !!}
+                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Insert Your Full Name', 'id' => 'name']) !!}
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -47,7 +49,7 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-sm-4 control-label">E-Mail Address</label>
                             <div class="col-sm-6">
-                                {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'placeholder' => 'E-Mail Address', 'required']) !!}
+                                {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'placeholder' => 'ex:email@gmail.com', 'required']) !!}
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -115,7 +117,7 @@
                         <div class="form-group{{ $errors->has('place_of_birth') ? ' has-error' : '' }}">
                             <label for="place_of_birth" class="col-sm-4 control-label">Place of Birth</label>
                             <div class="col-sm-6">
-                                {!! Form::text('place_of_birth', null, ['class' => 'form-control', 'placeholder' => 'Place of Birth', 'id' => 'place_of_birth', 'required', 'autofocus']) !!}
+                                {!! Form::text('place_of_birth', null, ['class' => 'form-control', 'placeholder' => 'ex: Hospital Kuala Lumpur', 'id' => 'place_of_birth', 'required', 'autofocus']) !!}
                                 @if ($errors->has('place_of_birth'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('place_of_birth') }}</strong>
@@ -127,7 +129,7 @@
                         <div class="form-group{{ $errors->has('nric') ? ' has-error' : '' }}">
                             <label for="nric" class="col-sm-4 control-label">IC</label>
                             <div class="col-sm-6">
-                                {!! Form::text('nric', null, ['class' => 'form-control', 'placeholder' => 'Identification Certificated', 'id' => 'nric', 'required', 'autofocus']) !!}
+                                {!! Form::text('nric', null, ['class' => 'form-control', 'placeholder' => 'ex: 940726146819', 'id' => 'nric', 'required', 'autofocus']) !!}
                                 @if ($errors->has('nric'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('nric') }}</strong>
@@ -151,7 +153,7 @@
                         <div class="form-group{{ $errors->has('phone_1') ? ' has-error' : '' }}">
                             <label for="phone_1" class="col-sm-4 control-label">Phone No</label>
                             <div class="col-sm-6">
-                                {!! Form::text('phone_1', null, ['class' => 'form-control', 'placeholder' => 'Mobile', 'id' => 'phone_1', 'required', 'autofocus']) !!}
+                                {!! Form::text('phone_1', null, ['class' => 'form-control', 'placeholder' => 'ex: 0179117030', 'id' => 'phone_1', 'required', 'autofocus']) !!}
                                 @if ($errors->has('phone_1'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_1') }}</strong>
@@ -163,7 +165,7 @@
                         <div class="form-group{{ $errors->has('phone_2') ? ' has-error' : '' }}">
                             <label for="phone_2" class="col-sm-4 control-label">Home No</label>
                             <div class="col-sm-6">
-                                {!! Form::text('phone_2', null, ['class' => 'form-control', 'placeholder' => 'Home', 'id' => 'phone_2', 'required', 'autofocus']) !!}
+                                {!! Form::text('phone_2', null, ['class' => 'form-control', 'placeholder' => 'ex: 0377844287', 'id' => 'phone_2', 'required', 'autofocus']) !!}
                                 @if ($errors->has('phone_2'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_2') }}</strong>
