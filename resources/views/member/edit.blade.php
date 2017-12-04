@@ -36,16 +36,6 @@
 
             <div class="panel-body">
 
-              <div class="form-group has-feedback row {{ $errors->has('name') ? ' has-error ' : '' }}">
-                {!! Form::label('name', 'Username' , array('class' => 'col-md-3 control-label')); !!}
-                <div class="col-md-9">
-                  <div class="input-group">
-                    {!! Form::text('name', old('name'), array('id' => 'name', 'class' => 'form-control', 'placeholder' => trans('forms.ph-username'))) !!}
-                    <label class="input-group-addon" for="name"><i class="fa fa-fw fa-user }}" aria-hidden="true"></i></label>
-                  </div>
-                </div>
-              </div>
-
               <div class="form-group has-feedback row {{ $errors->has('email') ? ' has-error ' : '' }}">
                 {!! Form::label('email', 'E-mail' , array('class' => 'col-md-3 control-label')); !!}
                 <div class="col-md-9">
@@ -57,16 +47,31 @@
               </div>
 
 
-              <div class="form-group has-feedback row {{ $errors->has('name') ? ' has-error ' : '' }}">
-                {!! Form::label('name', 'Name', array('class' => 'col-md-3 control-label')); !!}
+              <div class="form-group has-feedback row {{ $errors->has('first_name') ? ' has-error ' : '' }}">
+                {!! Form::label('name', 'First Name', array('class' => 'col-md-3 control-label')); !!}
                 <div class="col-md-9">
                   <div class="input-group">
-                    {!! Form::text('name', NULL, array('id' => 'name', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_firstname'))) !!}
-                    <label class="input-group-addon" for="name"><i class="fa fa-fw {{ trans('forms.create_user_icon_firstname') }}" aria-hidden="true"></i></label>
+                    {!! Form::text('first_name', old('first_name'), array('id' => 'first_name', 'class' => 'form-control', 'placeholder' => 'First Name')) !!}
+                    <label class="input-group-addon" for="first_name"><i class="fa fa-fw {{ trans('forms.create_user_icon_firstname') }}" aria-hidden="true"></i></label>
                   </div>
-                  @if ($errors->has('name'))
+                  @if ($errors->has('first_name'))
                     <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
+                        <strong>{{ $errors->first('first_name') }}</strong>
+                    </span>
+                  @endif
+                </div>
+              </div>
+
+              <div class="form-group has-feedback row {{ $errors->has('last_name') ? ' has-error ' : '' }}">
+                {!! Form::label('last_name', 'Last Name', array('class' => 'col-md-3 control-label')); !!}
+                <div class="col-md-9">
+                  <div class="input-group">
+                    {!! Form::text('last_name', old('last_name'), array('id' => 'last_name', 'class' => 'form-control', 'placeholder' => 'Last Name')) !!}
+                    <label class="input-group-addon" for="last_name"><i class="fa fa-fw {{ trans('forms.create_user_icon_firstname') }}" aria-hidden="true"></i></label>
+                  </div>
+                  @if ($errors->has('last_name'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('last_name') }}</strong>
                     </span>
                   @endif
                 </div>

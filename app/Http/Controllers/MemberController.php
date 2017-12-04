@@ -155,13 +155,15 @@ class MemberController extends Controller
 
         if ($emailCheck) {
             $validator = Validator::make($request->all(), [
-                'name'      => 'required|max:255',
+                'first_name'      => 'required|max:255',
+                'last_name'      => 'required|max:255',
                 'email'     => 'email|max:255|unique:users',
                 'password'  => 'present|confirmed|min:6',
             ]);
         } else {
             $validator = Validator::make($request->all(), [
-                'name'      => 'required|max:255',
+                'first_name'      => 'required|max:255',
+                'last_name'      => 'required|max:255',
                 'password'  => 'nullable|confirmed|min:6',
             ]);
         }
@@ -170,7 +172,7 @@ class MemberController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $user->name = $request->input('name');
+        $user->name = '';
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
 
@@ -181,6 +183,8 @@ class MemberController extends Controller
         if ($request->input('password') != null) {
             $user->password = bcrypt($request->input('password'));
         }
+
+        $user->save();
 
 
         ///PLEASE UPDATE CODE!!!!

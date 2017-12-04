@@ -23,11 +23,30 @@ class RegisterMemberController extends Controller
      */
     public function index()
     {
+        $states = [
+      	  'Johor' => 'Johor',
+          'Kedah' => 'Kedah',
+          'Kelantan' => 'Kelantan',
+          'Melaka' => 'Melaka',
+          'Negeri Sembilan' => 'Negeri Sembilan',
+          'Pahang' => 'Pahang',
+          'Perak' => 'Perak',
+          'Perlis' => 'Perlis',
+          'Pulau Pinang' => 'Pulau Pinang',
+          'Sabah' => 'Sabah',
+          'Sarawak' => 'Sarawak',
+          'Selangor' => 'Selangor',
+          'W.P. Kuala Lumpur' => 'W.P. Kuala Lumpur',
+          'W.P. Labuan' => 'W.P. Labuan',
+          'W.P. Putrajaya' => 'W.P. Putrajaya',
+      	];
+
         $data = [
           'race' => Race::all()->pluck('name','id')->toArray(),
           'nationality' => Nationality::all()->pluck('name','id')->toArray(),
           'education_level' => EducationLevel::all()->pluck('name','id')->toArray(),
-          'country' => Country::all()->pluck('name','iso_3166_2')->toArray()
+          'country' => Country::all()->pluck('name','iso_3166_2')->toArray(),
+          'state' => $states
         ];
 
         return view('member.register')->with($data);
@@ -79,8 +98,8 @@ class RegisterMemberController extends Controller
           $request['token'] = $request['_token'];
           $user = User::create($request->only([
             'token',
-            'username',
-            'name',
+            'first_name',
+            'last_name',
             'email',
             'password',
             'userable_type',
@@ -88,7 +107,8 @@ class RegisterMemberController extends Controller
             ]
           ));
 
-          $user->attachRole(ROLE_MEMBER);
+          //member = 6
+          $user->attachRole(6);
 
           //Address
           $request['is_primary'] = 1;
@@ -101,7 +121,7 @@ class RegisterMemberController extends Controller
 
         DB::commit();
 
-        return 'Thank you for your registration. please wait for your approval';
+        return redirect(url('login'))->with('success', 'Thank you for your registration. please wait for your approval');
     }
 
     /**

@@ -20,25 +20,25 @@
 
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <label for="name" class="col-sm-4 control-label">Username</label>
+                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                            <label for="first_name" class="col-sm-4 control-label">First Name</label>
                             <div class="col-sm-6">
-                                {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Username', 'id' => 'username', 'required', 'autofocus']) !!}
-                                @if ($errors->has('username'))
+                                {!! Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'First Name', 'id' => 'first_name']) !!}
+                                @if ($errors->has('first_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
+                                        <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-sm-4 control-label">Name</label>
+                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                            <label for="last_name" class="col-sm-4 control-label">Last Name</label>
                             <div class="col-sm-6">
-                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'First Name', 'id' => 'name']) !!}
-                                @if ($errors->has('name'))
+                                {!! Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Last Name', 'id' => 'last_name']) !!}
+                                @if ($errors->has('last_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('last_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -251,7 +251,7 @@
                         <div class="form-group{{ $errors->has('address[state]') ? ' has-error' : '' }}">
                             <label for="address[state]" class="col-sm-4 control-label">State</label>
                             <div class="col-sm-6">
-                                {!! Form::text('address[state]', null, ['class' => 'form-control', 'placeholder' => 'State', 'id' => 'state', 'required', 'autofocus']) !!}
+                                {!! Form::select('address[state]', $state, null, ['placeholder' => 'Please choose...', 'class' => 'form-control']) !!}
                                 @if ($errors->has('address[state]'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('address[state]') }}</strong>
@@ -263,7 +263,7 @@
                         <div class="form-group{{ $errors->has('address[country]') ? ' has-error' : '' }}">
                             <label for="address[country]" class="col-sm-4 control-label">Country</label>
                             <div class="col-sm-6">
-                                {!! Form::select('address[country]', $country, null, ['placeholder' => 'Please choose...', 'class' => 'form-control']) !!}
+                                {!! Form::select('address[country]', $country, 'MY', ['placeholder' => 'Please choose...', 'class' => 'form-control']) !!}
                                 @if ($errors->has('address[country]'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('address[country]') }}</strong>
