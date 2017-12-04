@@ -16,7 +16,7 @@
           $query->where('activated', 1);
       })->get()
     ),
-    'title' => 'Activated Member',
+    'title' => 'Registered Member',
     'footer_link' => route('members.index', ['status' => 1]),
   ])
   @endcomponent
