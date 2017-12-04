@@ -76,9 +76,13 @@
             <ul class="nav navbar-nav navbar-right">
                 {{-- Authentication Links --}}
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">{!! trans('titles.login') !!}</a></li>
+                    @if(!Request::is('login'))
+                      <li><a href="{{ route('login') }}">{!! trans('titles.login') !!}</a></li>
+                    @endif
+                    @if(!Request::is('register_member'))
                     <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
                     <li><a href="{{ route('register_member.index') }}">Member Registration</a></li>
+                    @endif
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

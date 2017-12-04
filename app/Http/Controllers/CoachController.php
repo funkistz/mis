@@ -184,4 +184,15 @@ class CoachController extends Controller
 
         return back()->with('error', trans('usersmanagement.deleteSelfError'));
     }
+
+    public function memberList($id)
+    {
+        $user = User::findOrFail($id);
+
+        $data = [
+            'user' => $user,
+        ];
+
+        return view('coach.table')->with($data);
+    }
 }

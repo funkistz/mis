@@ -49,11 +49,11 @@
                         <i class="fa fa-eye fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md"> {{ trans('usersmanagement.viewProfile') }}</span>
                       </a>
 
-                      <a href="/users/{{$user->id}}/edit" class="btn btn-sm btn-warning">
+                      <a href="/members/{{$user->id}}/edit" class="btn btn-sm btn-warning">
                         <i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md"> {{ trans('usersmanagement.editUser') }} </span>
                       </a>
 
-                      {!! Form::open(array('url' => 'users/' . $user->id, 'class' => 'form-inline')) !!}
+                      {!! Form::open(array('url' => 'members/' . $user->id, 'class' => 'form-inline')) !!}
                         {!! Form::hidden('_method', 'DELETE') !!}
                         {!! Form::button('<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md">' . trans('usersmanagement.deleteUser') . '</span>' , array('class' => 'btn btn-danger btn-sm','type' => 'button', 'data-toggle' => 'modal', 'data-target' => '#confirmDelete', 'data-title' => 'Delete User', 'data-message' => 'Are you sure you want to delete this user?')) !!}
                       {!! Form::close() !!}
@@ -173,14 +173,31 @@
 
             <div class="col-sm-5 col-xs-6 text-larger">
               <strong>
+                Coach
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                @foreach( $user->userable->coaches as $coach)
+                <li class="list-group-item">{{$coach->user->name}}</li>
+                @endforeach
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
                 Course
               </strong>
             </div>
 
             <div class="col-sm-7">
-              <ul>
+              <ul class="list-group">
                 @foreach( $user_course as $course)
-                <li>{{$course->name}}</li>
+                <li class="list-group-item">{{$course->course->name}} - {{$course->name}}</li>
                 @endforeach
               </ul>
             </div>
@@ -222,90 +239,6 @@
 
             @endif
 
-            @if ($user->signup_ip_address)
-
-              <div class="col-sm-5 col-xs-6 text-larger">
-                <strong>
-                  {{ trans('usersmanagement.labelIpEmail') }}
-                </strong>
-              </div>
-
-              <div class="col-sm-7">
-                {{ $user->signup_ip_address }}
-              </div>
-
-              <div class="clearfix"></div>
-              <div class="border-bottom"></div>
-
-            @endif
-
-            @if ($user->signup_confirmation_ip_address)
-
-              <div class="col-sm-5 col-xs-6 text-larger">
-                <strong>
-                  {{ trans('usersmanagement.labelIpConfirm') }}
-                </strong>
-              </div>
-
-              <div class="col-sm-7">
-                {{ $user->signup_confirmation_ip_address }}
-              </div>
-
-              <div class="clearfix"></div>
-              <div class="border-bottom"></div>
-
-            @endif
-
-            @if ($user->signup_sm_ip_address)
-
-              <div class="col-sm-5 col-xs-6 text-larger">
-                <strong>
-                  {{ trans('usersmanagement.labelIpSocial') }}
-                </strong>
-              </div>
-
-              <div class="col-sm-7">
-                {{ $user->signup_sm_ip_address }}
-              </div>
-
-              <div class="clearfix"></div>
-              <div class="border-bottom"></div>
-
-            @endif
-
-            @if ($user->admin_ip_address)
-
-              <div class="col-sm-5 col-xs-6 text-larger">
-                <strong>
-                  {{ trans('usersmanagement.labelIpAdmin') }}
-                </strong>
-              </div>
-
-              <div class="col-sm-7">
-                {{ $user->admin_ip_address }}
-              </div>
-
-              <div class="clearfix"></div>
-              <div class="border-bottom"></div>
-
-            @endif
-
-            @if ($user->updated_ip_address)
-
-              <div class="col-sm-5 col-xs-6 text-larger">
-                <strong>
-                  {{ trans('usersmanagement.labelIpUpdate') }}
-                </strong>
-              </div>
-
-              <div class="col-sm-7">
-                {{ $user->updated_ip_address }}
-              </div>
-
-              <div class="clearfix"></div>
-              <div class="border-bottom"></div>
-
-            @endif
 
           </div>
 

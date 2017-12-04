@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\AdminLog;
 use App\Traits\CaptureIpTrait;
 use Auth;
 use Illuminate\Http\Request;
@@ -33,10 +34,13 @@ class UsersManagementController extends Controller
         if(!empty($role)){
           $users = User::whereHas('roles', function ($query) use($role) {
               $query->where('slug', $role);
+              $query->where('roles.id', '!=' , 6);
           })->get();
           $role_name = ucfirst($role);
         }else{
-          $users = User::all();
+          $users = User::whereHas('roles', function ($query) {
+              $query->where('roles.id', '!=' , 6);
+          })->get();
           $role_name = 'User';
         }
         $roles = Role::all();
@@ -71,9 +75,8 @@ class UsersManagementController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'name'                  => 'required|max:255|unique:users',
-                'first_name'            => '',
-                'last_name'             => '',
+                'first_name'            => 'required|max:255|unique:users',
+                'last_name'             => 'required|max:255|unique:users',
                 'email'                 => 'required|email|max:255|unique:users',
                 'password'              => 'required|min:6|max:20|confirmed',
                 'password_confirmation' => 'required|same:password',
@@ -114,6 +117,12 @@ class UsersManagementController extends Controller
         $user->profile()->save($profile);
         $user->attachRole($request->input('role'));
         $user->save();
+
+        $log = 'Created new ' . Role::find($request->input('role'))->name . ' named ' . $user->name;
+        AdminLog::create([
+          'user_id' => auth()->user()->id,
+          'log' => $log
+        ]);
 
         return redirect('users')->with('success', trans('usersmanagement.createSuccess'));
     }
@@ -174,13 +183,15 @@ class UsersManagementController extends Controller
 
         if ($emailCheck) {
             $validator = Validator::make($request->all(), [
-                'name'      => 'required|max:255',
+                'first_name'      => 'required|max:255',
+                'last_name'      => 'required|max:255',
                 'email'     => 'email|max:255|unique:users',
                 'password'  => 'present|confirmed|min:6',
             ]);
         } else {
             $validator = Validator::make($request->all(), [
-                'name'      => 'required|max:255',
+                'first_name'      => 'required|max:255',
+                'last_name'      => 'required|max:255',
                 'password'  => 'nullable|confirmed|min:6',
             ]);
         }
@@ -206,6 +217,12 @@ class UsersManagementController extends Controller
         $user->updated_ip_address = $ipAddress->getClientIp();
         $user->save();
 
+        $log = 'Edited user ' . $user->name;
+        AdminLog::create([
+          'user_id' => auth()->user()->id,
+          'log' => $log
+        ]);
+
         return back()->with('success', trans('usersmanagement.updateSuccess'));
     }
 
@@ -227,8 +244,15 @@ class UsersManagementController extends Controller
             $user->save();
             $user->delete();
 
+            $log = 'Deleted user ' . $user->name;
+            AdminLog::create([
+              'user_id' => auth()->user()->id,
+              'log' => $log
+            ]);
+
             return redirect('users')->with('success', trans('usersmanagement.deleteSuccess'));
         }
+
 
         return back()->with('error', trans('usersmanagement.deleteSelfError'));
     }

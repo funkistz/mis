@@ -105,7 +105,7 @@ class MemberController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $user_course = $user->userable->courses;
+        $user_course = $user->userable->courseClasses;
 
         $data = [
             'user' => $user,

@@ -27,21 +27,6 @@
 
             {!! Form::open(array('action' => 'UsersManagementController@store')) !!}
 
-              <div class="form-group has-feedback row {{ $errors->has('name') ? ' has-error ' : '' }}">
-                {!! Form::label('name', trans('forms.create_user_label_username'), array('class' => 'col-md-3 control-label')); !!}
-                <div class="col-md-9">
-                  <div class="input-group">
-                    {!! Form::text('name', NULL, array('id' => 'name', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_username'))) !!}
-                    <label class="input-group-addon" for="name"><i class="fa fa-fw {{ trans('forms.create_user_icon_username') }}" aria-hidden="true"></i></label>
-                  </div>
-                  @if ($errors->has('name'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                  @endif
-                </div>
-              </div>
-
               <div class="form-group has-feedback row {{ $errors->has('email') ? ' has-error ' : '' }}">
                 {!! Form::label('email', trans('forms.create_user_label_email'), array('class' => 'col-md-3 control-label')); !!}
                 <div class="col-md-9">

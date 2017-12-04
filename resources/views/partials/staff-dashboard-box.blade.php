@@ -25,7 +25,7 @@
 <div class="col-md-4">
   @component('partials.dashboard-box',[
     'value' => count(
-      App\Models\Member::has('courses', 0)->get()
+      App\Models\Member::has('courseClasses', 0)->get()
     ),
     'title' => 'Member do not have course',
     'footer_link' => route('members.index', ['course' => 0]),
@@ -36,7 +36,7 @@
 <div class="col-md-4">
   @component('partials.dashboard-box',[
     'value' => count(
-      \DB::table('course_member')->where('accepted', 1)->get()
+      \DB::table('course_class_member')->where('accepted','!=', NULL)->get()
     ),
     'title' => 'Members attend courses',
     'footer_link' => route('members.index', ['course' => 0]),
@@ -47,7 +47,7 @@
 <div class="col-md-4">
   @component('partials.dashboard-box',[
     'value' => count(
-      \DB::table('course_member')->where('accepted', 0)->get()
+      \DB::table('course_class_member')->where('accepted', NULL)->get()
     ),
     'title' => 'Members not attend courses',
     'footer_link' => route('members.index', ['course' => 0]),
@@ -58,7 +58,7 @@
 <div class="col-md-4">
   @component('partials.dashboard-box',[
     'value' => count(
-      App\Models\Course::all()
+      App\Models\CourseClass::all()
     ),
     'title' => 'Courses',
     'footer_link' => route('courses.index'),

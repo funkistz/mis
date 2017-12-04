@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\CourseClass;
 use App\Models\Member;
 
 class MemberCourseController extends Controller
@@ -76,10 +77,16 @@ class MemberCourseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request['status'] == 1){
+          $pivot_data = ['fixed' => true];
+        }else{
+          $pivot_data = ['accepted' => NULL, 'fixed' => true];
+        }
+
         $member = Member::find( auth()->user()->userable->id );
 
-        $member->courses()->syncWithoutDetaching([
-          $id => ['accepted' => true]
+        $member->courseClasses()->syncWithoutDetaching([
+          $id => $pivot_data
         ]);
 
         return redirect()->back();

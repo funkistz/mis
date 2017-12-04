@@ -3,18 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Coach extends Model
+class AdminLog extends Model
 {
-    use SoftDeletes;
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'coaches';
+    protected $table = 'admin_logs';
 
     /**
      * The attributes that are not mass assignable.
@@ -29,25 +27,13 @@ class Coach extends Model
      * @var array
      */
     protected $fillable = [
-        'phone_1',
-        'phone_2',
-        'nric'
+        'user_id',
+        'log',
     ];
 
-    protected $dates = [
-        'deleted_at',
-    ];
-
-    /**
-     * Get all of the member's user.
-     */
     public function user()
     {
-        return $this->morphOne('App\Models\User', 'userable');
+      return $this->belongsTo(User::clas);
     }
 
-    public function members()
-    {
-        return $this->belongsToMany(Member::class);
-    }
 }

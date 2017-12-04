@@ -102,6 +102,23 @@
 
             @endif
 
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Member(s) under coach
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+              @foreach($user->userable->members as $member)
+              <li class="list-group-item">{{$member->user->first_name}} {{$member->user->last_name}}</li>
+              @endforeach
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
             @if ($user->created_at)
 
               <div class="col-sm-5 col-xs-6 text-larger">

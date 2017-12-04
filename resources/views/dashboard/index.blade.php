@@ -82,8 +82,12 @@
           @include('partials.calendar-dashboard')
           @endrole
 
-          @role(['admin','officer', 'coofficer'])
+          @role(['officer', 'coofficer'])
           @include('partials.news-dashboard', ['col' => 12])
+          @endrole
+
+          @role(['admin'])
+          @include('partials.news-dashboard')
           @endrole
 
           @role(['staff'])

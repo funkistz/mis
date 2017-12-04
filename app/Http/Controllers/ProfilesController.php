@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profile;
 use App\Models\Theme;
 use App\Models\User;
+use App\Models\Member;
 use App\Notifications\SendGoodbyeEmail;
 use App\Traits\CaptureIpTrait;
 use File;
@@ -155,6 +156,15 @@ class ProfilesController extends Controller
         }
 
         $user->updated_ip_address = $ipAddress->getClientIp();
+
+        if($user->userable_type == 'App\Models\Member'){
+
+            Member::find($user->userable_id)->update([
+              'phone_1' => $request['phone_1'],
+              'phone_2' => $request['phone_2'],
+            ]);
+
+        }
 
         $user->save();
 

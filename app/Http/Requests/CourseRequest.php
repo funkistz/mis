@@ -24,6 +24,7 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
+            'course_id' => 'required',
             'name' => 'required|max:45',
             'date' => 'date',
             'decription' => 'max:255',

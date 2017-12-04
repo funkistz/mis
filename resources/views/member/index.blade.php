@@ -53,6 +53,7 @@
                                         <th>Actions</th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,12 +76,14 @@
                                             </td>
                                             <td class="hidden-sm hidden-xs hidden-md">{{$user->created_at}}</td>
                                             <td class="hidden-sm hidden-xs hidden-md">{{$user->updated_at}}</td>
+                                            @role(['officer', 'staff'])
                                             <td>
                                                 {!! Form::open(array('url' => 'members/' . $user->id, 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Delete')) !!}
                                                     {!! Form::hidden('_method', 'DELETE') !!}
                                                     {!! Form::button('<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Delete</span><span class="hidden-xs hidden-sm hidden-md"> User</span>', array('class' => 'btn btn-danger btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmDelete', 'data-title' => 'Delete User', 'data-message' => 'Are you sure you want to delete this user ?')) !!}
                                                 {!! Form::close() !!}
                                             </td>
+                                            @endrole
                                             <td>
                                                 <a class="btn btn-sm btn-success btn-block" href="{{ URL::to('members/' . $user->id) }}" data-toggle="tooltip" title="Show">
                                                     <i class="fa fa-eye fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Show</span><span class="hidden-xs hidden-sm hidden-md"> User</span>
@@ -98,6 +101,14 @@
                                                   {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Approve Member</span>', array('class' => 'btn btn-primary btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmApprove', 'data-title' => 'Approve Member', 'data-message' => 'Are you sure you want to approve this member ?')) !!}
                                               {!! Form::close() !!}
                                               @endif
+                                            </td>
+                                            @endrole
+
+                                            @role(['staff'])
+                                            <td>
+                                              <a class="btn btn-sm btn-warning btn-block" href="{{ URL::to('members/' . $user->id . '/assign') }}" data-toggle="tooltip" title="Assign Course">
+                                                  <i class="fa fa-share fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Assign</span><span class="hidden-xs hidden-sm hidden-md"> Course</span>
+                                              </a>
                                             </td>
                                             @endrole
                                         </tr>

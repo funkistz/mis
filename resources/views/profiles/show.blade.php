@@ -31,13 +31,6 @@
 						<dl class="user-info">
 
 							<dt>
-								{{ trans('profile.showProfileUsername') }}
-							</dt>
-							<dd>
-								{{ $user->name }}
-							</dd>
-
-							<dt>
 								{{ trans('profile.showProfileFirstName') }}
 							</dt>
 							<dd>
@@ -60,56 +53,35 @@
 								{{ $user->email }}
 							</dd>
 
-							@if ($user->profile)
-
-								@if ($user->profile->theme_id)
-									<dt>
-										{{ trans('profile.showProfileTheme') }}
-									</dt>
-									<dd>
-										{{ $currentTheme->name }}
-									</dd>
-								@endif
-
-								@if ($user->profile->location)
-									<dt>
-										{{ trans('profile.showProfileLocation') }}
-									</dt>
-									<dd>
-										{{ $user->profile->location }} <br />
-										Latitude: <span id="latitude"></span> / Longitude: <span id="longitude"></span> <br />
-
-										<div id="map-canvas"></div>
-
-									</dd>
-								@endif
-
-								@if ($user->profile->bio)
-									<dt>
-										{{ trans('profile.showProfileBio') }}
-									</dt>
-									<dd>
-										{{ $user->profile->bio }}
-									</dd>
-								@endif
-
-								@if ($user->profile->twitter_username)
-									<dt>
-										{{ trans('profile.showProfileTwitterUsername') }}
-									</dt>
-									<dd>
-										{!! HTML::link('https://twitter.com/'.$user->profile->twitter_username, $user->profile->twitter_username, array('class' => 'twitter-link', 'target' => '_blank')) !!}
-									</dd>
-								@endif
-
-								@if ($user->profile->github_username)
-									<dt>
-										{{ trans('profile.showProfileGitHubUsername') }}
-									</dt>
-									<dd>
-										{!! HTML::link('https://github.com/'.$user->profile->github_username, $user->profile->github_username, array('class' => 'github-link', 'target' => '_blank')) !!}
-									</dd>
-								@endif
+							@if(!empty($user->userable->phone_1))
+							<dt>
+								Phone no.
+							</dt>
+							<dd>
+								{{ $user->userable->phone_1 }}
+							</dd>
+							@endif
+							@if(!empty($user->userable->phone_2))
+							<dt>
+								Home no.
+							</dt>
+							<dd>
+								{{ $user->userable->phone_2 }}
+							</dd>
+							@endif
+							@if(!empty($user->hasAddress()))
+							<dt>
+								Address
+							</dt>
+							<dd>
+								@php $user_address = $user->getPrimaryAddress(); @endphp
+								{{ $user_address->line_1 }}<br>
+								{{ $user_address->line_2 }}<br>
+								{{ $user_address->post_code }}<br>
+								{{ $user_address->city }}<br>
+								{{ $user_address->state }}<br>
+								{{ $user_address->country->name }}
+							</dd>
 							@endif
 
 						</dl>

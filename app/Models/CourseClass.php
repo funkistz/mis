@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Coach extends Model
+class CourseClass extends Model
 {
     use SoftDeletes;
 
@@ -14,7 +14,7 @@ class Coach extends Model
      *
      * @var string
      */
-    protected $table = 'coaches';
+    protected $table = 'course_classes';
 
     /**
      * The attributes that are not mass assignable.
@@ -29,25 +29,26 @@ class Coach extends Model
      * @var array
      */
     protected $fillable = [
-        'phone_1',
-        'phone_2',
-        'nric'
+        'name',
+        'description',
+        'course_id',
+        'date',
+        'venue',
+        'is_active'
     ];
 
     protected $dates = [
+        'date',
         'deleted_at',
     ];
 
-    /**
-     * Get all of the member's user.
-     */
-    public function user()
+    public function course()
     {
-        return $this->morphOne('App\Models\User', 'userable');
+        return $this->belongsTo(Course::class);
     }
 
     public function members()
     {
-        return $this->belongsToMany(Member::class);
+        return $this->belongsToMany(Member::class)->withPivot('accepted','fixed');
     }
 }

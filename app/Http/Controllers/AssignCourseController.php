@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Member;
 use App\Models\Course;
 use App\Models\CourseClass;
-use App\Http\Requests\CourseRequest;
+use Carbon\Carbon;
 
-class CourseController extends Controller
+class AssignCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +18,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $data = [
-          'course' => CourseClass::with('course')->get()
-        ];
-
-        return view('course.index')->with($data);
+        //
     }
 
     /**
@@ -30,10 +28,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $data = [
-          'courses' => Course::all()->pluck('name', 'id')->toArray()
-        ];
-        return view('course.create')->with($data);
+        //
     }
 
     /**
@@ -42,19 +37,9 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CourseRequest $request)
+    public function store(Request $request)
     {
-        $request['is_active'] = 1;
-        CourseClass::create($request->only([
-          'course_id',
-          'name',
-          'date',
-          'description',
-          'venue',
-          'is_active',
-        ]));
-
-        return redirect()->route('courses.index');
+        //
     }
 
     /**
@@ -65,11 +50,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $data = [
-          'course' => CourseClass::find($id)
-        ];
-
-        return view('course.show')->with($data);
+        //
     }
 
     /**
@@ -80,7 +61,16 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user_course = $user->userable->courseClasses->pluck('id')->toArray();
+
+        $data = [
+            'user' => $user,
+            'user_course' => @$user_course,
+            'course' => CourseClass::all()->pluck('name','id')->toArray(),
+        ];
+
+        return view('assign_course.edit')->with($data);
     }
 
     /**
@@ -92,7 +82,18 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+
+        $member = User::find($id)->userable;
+        $course = [];
+
+        foreach ($request['course'] as $key => $value) {
+          $course[$value] = ['accepted' => Carbon::now()];
+        }
+
+        $member->courseClasses()->sync($course);
+
+        return back()->with('success', 'Course Updated Succesfully');
     }
 
     /**
@@ -103,10 +104,6 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        $course = CourseClass::findOrFail($id);
-        $course->delete();
-
-        return redirect('courses')->with('success', 'Course Deleted Successfully');
-
+        //
     }
 }

@@ -33,7 +33,7 @@
 
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            Showing All Members
+                            Showing All Courses
 
                             <div class="btn-group pull-right btn-group-xs">
 
@@ -76,7 +76,7 @@
                                 <tbody>
                                     @foreach($course as $course)
                                         <tr>
-                                            <td>{{$course->name}}</td>
+                                            <td>{{$course->course->name}} - {{$course->name}}</td>
                                             <td>{{$course->date}}</td>
                                             <td>{{$course->decription}}</td>
                                             <td>{{$course->venue}}</td>

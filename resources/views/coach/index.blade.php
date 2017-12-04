@@ -71,6 +71,7 @@
                                         <th>Actions</th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,6 +96,11 @@
                                             <td>
                                                 <a class="btn btn-sm btn-info btn-block" href="{{ URL::to('coachs/' . $user->id . '/edit') }}" data-toggle="tooltip" title="Edit">
                                                     <i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Edit</span><span class="hidden-xs hidden-sm hidden-md"> Coach</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-primary btn-block" href="{{ URL::to('coachs/' . $user->id . '/members') }}" data-toggle="tooltip" title="Edit">
+                                                    <i class="fa fa-users fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">View</span><span class="hidden-xs hidden-sm hidden-md"> Members</span>
                                                 </a>
                                             </td>
                                         </tr>

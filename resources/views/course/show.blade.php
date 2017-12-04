@@ -21,6 +21,8 @@
           </div>
           <div class="panel-body">
 
+
+
             @if ($course->name)
 
               <div class="col-sm-5 col-xs-6 text-larger">
@@ -28,7 +30,7 @@
               </div>
 
               <div class="col-sm-7">
-                {{ $course->name }}
+                {{ $course->course->name }} - {{ $course->name }}
               </div>
 
               <div class="clearfix"></div>

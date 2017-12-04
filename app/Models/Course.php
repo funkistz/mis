@@ -46,4 +46,9 @@ class Course extends Model
     {
         return $this->belongsToMany('App\Models\Member')->withPivot('accepted');
     }
+
+    public function courseClasses()
+    {
+        return $this->hasMany(CourseClass::class);
+    }
 }

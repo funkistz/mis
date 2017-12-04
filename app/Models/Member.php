@@ -105,4 +105,9 @@ class Member extends Model
     {
         return $this->belongsTo('App\Models\MemberCard');
     }
+
+    public function courseClasses()
+    {
+        return $this->belongsToMany(CourseClass::class)->withPivot('accepted', 'fixed');
+    }
 }

@@ -27,6 +27,18 @@
 
             {!! Form::open(array('action' => 'CourseController@store')) !!}
 
+              <div class="form-group has-feedback row {{ $errors->has('course_id') ? ' has-error' : '' }}">
+                  <label for="course_id" class="col-md-3 control-label">Course</label>
+                  <div class="col-md-9">
+                      {!! Form::select('course_id', $courses, null, ['placeholder' => 'Please choose...', 'class' => 'form-control', 'required' => true]) !!}
+                      @if ($errors->has('course_id'))
+                          <span class="help-block">
+                              <strong>{{ $errors->first('course_id') }}</strong>
+                          </span>
+                      @endif
+                  </div>
+              </div>
+
               <div class="form-group has-feedback row {{ $errors->has('name') ? ' has-error ' : '' }}">
                 {!! Form::label('name', 'Name', array('class' => 'col-md-3 control-label')); !!}
                 <div class="col-md-9">

@@ -10,14 +10,12 @@
           </tr>
         </thead>
         <tbody>
+          @foreach(auth()->user()->logs as $log)
           <tr>
-            <td>...</td>
-            <td>...</td>
+            <td>{{$log->created_at}}</td>
+            <td>{{$log->log}}</td>
           </tr>
-          <tr>
-            <td>...</td>
-            <td>...</td>
-          </tr>
+          @endforeach
         </tbody>
       </table>
     </div>

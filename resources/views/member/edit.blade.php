@@ -77,20 +77,6 @@
                 </div>
               </div>
 
-              @role(['staff'])
-              <div class="form-group has-feedback row {{ $errors->has('course[]') ? ' has-error ' : '' }}">
-                {!! Form::label('course[]', 'Course', array('class' => 'col-md-3 control-label')); !!}
-                <div class="col-md-9">
-                  {!! Form::select('course[]', $course, $user_course, array('multiple' => 'multiple','name' => 'course[]', 'id' => 'course', 'class' => 'form-control')) !!}
-                  @if ($errors->has('course'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('course') }}</strong>
-                    </span>
-                  @endif
-                </div>
-              </div>
-              @endrole
-
               @role(['coofficer'])
               <div class="form-group has-feedback row {{ $errors->has('coach[]') ? ' has-error ' : '' }}">
                 {!! Form::label('coach[]', 'coach', array('class' => 'col-md-3 control-label')); !!}

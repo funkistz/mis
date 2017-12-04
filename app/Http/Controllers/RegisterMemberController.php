@@ -111,8 +111,11 @@ class RegisterMemberController extends Controller
           $user->attachRole(6);
 
           //Address
-          $request['is_primary'] = 1;
-          $user->addAddress($request->address);
+          $address = $request->address;
+          $address['is_primary'] = 1;
+
+          // dd($address);
+          $user->addAddress($address);
 
         } catch(\Exception $e) {
           DB::rollback();

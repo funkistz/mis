@@ -78,6 +78,11 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
+    public function logs()
+    {
+        return $this->hasMany(AdminLog::class);
+    }
+
     /**
      * Build Social Relationships.
      *

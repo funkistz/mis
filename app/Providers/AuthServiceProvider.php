@@ -4,6 +4,7 @@ namespace App\Providers;
 use App\Models\MemberCard;
 use App\Models\Member;
 use App\Models\Course;
+use App\Models\CourseClass;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -19,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         MemberCard::class => 'App\Policies\MemberCardPolicy',
         Member::class => 'App\Policies\MemberPolicy',
         Course::class => 'App\Policies\CoursePolicy',
+        CourseClass::class => 'App\Policies\CourseClassPolicy',
     ];
 
     /**

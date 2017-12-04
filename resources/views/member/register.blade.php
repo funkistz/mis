@@ -284,6 +284,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
+                                <button type="reset" class="btn btn-danger">
+                                    Clear
+                                </button>
                             </div>
                         </div>
 

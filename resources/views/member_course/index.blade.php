@@ -33,26 +33,8 @@
 
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            Showing All Members
+                            Showing All Member Courses
 
-                            <div class="btn-group pull-right btn-group-xs">
-
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-ellipsis-v fa-fw" aria-hidden="true"></i>
-                                    <span class="sr-only">
-                                        Show Course Management Menu
-                                    </span>
-                                </button>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="/courses/create">
-                                            <i class="fa fa-fw fa-user-plus" aria-hidden="true"></i>
-                                            Create New Course
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
 
@@ -72,20 +54,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($members->courses as $course)
+                                    @foreach($members->courseClasses as $course)
                                         <tr>
-                                            <td>{{$course->name}}</td>
+                                            <td>{{$course->course->name}} - {{$course->name}}</td>
                                             <td>{{$course->date}}</td>
                                             <td>{{$course->decription}}</td>
                                             <td>{{$course->venue}}</td>
                                             <td>
                                               @can('acceptCourse', $course)
-                                                {!! Form::open(array('url' => 'member_courses/' . $course->id, 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Accept')) !!}
+                                                {!! Form::open(array('url' => 'member_courses/' . $course->id . '?status=1', 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Accept')) !!}
                                                     {!! Form::hidden('_method', 'PUT') !!}
-                                                    {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Accept</span><span class="hidden-xs hidden-sm hidden-md"> Course</span>', array('class' => 'btn btn-primary btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => 'Accept Course', 'data-message' => 'Are you sure you want to accept this Course ?')) !!}
+                                                    {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Accept</span>', array('class' => 'btn btn-primary btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => 'Accept Course', 'data-message' => 'Are you sure you want to accept this Course ?')) !!}
+                                                {!! Form::close() !!}
+
+                                                {!! Form::open(array('url' => 'member_courses/' . $course->id . '?status=0', 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Decline')) !!}
+                                                    {!! Form::hidden('_method', 'PUT') !!}
+                                                    {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Decline</span>', array('class' => 'btn btn-danger btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => 'Decline Course', 'data-message' => 'Are you sure you want to decline this Course ?')) !!}
                                                 {!! Form::close() !!}
                                               @else
-                                              Accepted
+                                                @if(!empty($course->pivot->accepted))
+                                                  <span class="label label-success">Accepted</span>
+                                                @else
+                                                  <span class="label label-danger">Declined</span>
+                                                @endif
                                               @endcan
                                             </td>
                                     @endforeach

@@ -48,7 +48,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group margin-bottom-3">
+                        <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Login
@@ -56,6 +56,19 @@
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
+                                </a>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4 margin-bottom-1">
+                                    Not yet register?
+                            </div>
+                            <div class="col-md-8 col-md-offset-4">
+                                <a class="btn btn-warning" href="{{ url('register_member') }}">
+                                    Register as member now
                                 </a>
                             </div>
                         </div>
