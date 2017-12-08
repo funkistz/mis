@@ -50,7 +50,7 @@ $card = $member->memberCard;
                         <table class="table pull-left" style="width:400px;">
                           <tbody>
                             <tr>
-                              <th width="120">Name:</th>
+                              <th width="120">Nama:</th>
                               <td>{{ $user->name }}</td>
                             </tr>
                             <tr>
@@ -63,10 +63,14 @@ $card = $member->memberCard;
                             </tr>
                             <tr>
                               <th>Daerah/Unit:</th>
-                              <td>DUNGUN</td>
+                              <td>MARANG</td>
                             </tr>
                             <tr>
                               <th>Tarikh Lantikan:</th>
+                              <td>{{ $card->induction->format('d.m.o') }}</td>
+                            </tr>
+                            <tr>
+                              <th>Jenis Darah:</th>
                               <td>{{ $card->induction->format('d.m.o') }}</td>
                             </tr>
                           </tbody>

@@ -16,8 +16,8 @@ class NationalitySeeder extends Seeder
           Nationality::truncate();
           DB::table('nationalities')->insert([
             [
-              'name' => 'Malaysian',
-              'slug' => 'malaysian',
+              'name' => 'Malays',
+              'slug' => 'malays',
               'description' => '',
               'is_active' => 1,
               'created_at' => date('Y-m-d H:i:s')
