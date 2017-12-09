@@ -23,7 +23,7 @@
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                             <label for="first_name" class="col-sm-4 control-label">First Name</label>
                             <div class="col-sm-6">
-                                {!! Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'First Name', 'id' => 'first_name']) !!}
+                                {!! Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => 'Insert Your First Name Here', 'id' => 'first_name']) !!}
                                 @if ($errors->has('first_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('first_name') }}</strong>
@@ -35,7 +35,7 @@
                         <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                             <label for="last_name" class="col-sm-4 control-label">Last Name</label>
                             <div class="col-sm-6">
-                                {!! Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Last Name', 'id' => 'last_name']) !!}
+                                {!! Form::text('last_name', null, ['class' => 'form-control', 'placeholder' => 'Insert Your Last Name Here', 'id' => 'last_name']) !!}
                                 @if ($errors->has('last_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('last_name') }}</strong>
@@ -47,7 +47,7 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-sm-4 control-label">E-Mail Address</label>
                             <div class="col-sm-6">
-                                {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'placeholder' => 'E-Mail Address', 'required']) !!}
+                                {!! Form::email('email', null, ['class' => 'form-control', 'id' => 'email', 'placeholder' => 'ex: member@gmail.com', 'required']) !!}
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -59,7 +59,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-sm-4 control-label">Password</label>
                             <div class="col-sm-6">
-                                {!! Form::password('password', ['class' => 'form-control', 'id' => 'password', 'placeholder' => 'Password', 'required']) !!}
+                                {!! Form::password('password', ['class' => 'form-control', 'id' => 'password', 'placeholder' => 'Your Password', 'required']) !!}
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -115,7 +115,7 @@
                         <div class="form-group{{ $errors->has('place_of_birth') ? ' has-error' : '' }}">
                             <label for="place_of_birth" class="col-sm-4 control-label">Place of Birth</label>
                             <div class="col-sm-6">
-                                {!! Form::text('place_of_birth', null, ['class' => 'form-control', 'placeholder' => 'Place of Birth', 'id' => 'place_of_birth', 'required', 'autofocus']) !!}
+                                {!! Form::text('place_of_birth', null, ['class' => 'form-control', 'placeholder' => 'ex: Hospital Kuala Lumpur', 'id' => 'place_of_birth', 'required', 'autofocus']) !!}
                                 @if ($errors->has('place_of_birth'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('place_of_birth') }}</strong>
@@ -127,7 +127,7 @@
                         <div class="form-group{{ $errors->has('nric') ? ' has-error' : '' }}">
                             <label for="nric" class="col-sm-4 control-label">IC</label>
                             <div class="col-sm-6">
-                                {!! Form::text('nric', null, ['class' => 'form-control', 'placeholder' => 'Identification Certificated', 'id' => 'nric', 'required', 'autofocus']) !!}
+                                {!! Form::text('nric', null, ['class' => 'form-control', 'placeholder' => 'ex: 940726146819', 'id' => 'nric', 'required', 'autofocus']) !!}
                                 @if ($errors->has('nric'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('nric') }}</strong>
@@ -151,7 +151,7 @@
                         <div class="form-group{{ $errors->has('phone_1') ? ' has-error' : '' }}">
                             <label for="phone_1" class="col-sm-4 control-label">Phone No</label>
                             <div class="col-sm-6">
-                                {!! Form::text('phone_1', null, ['class' => 'form-control', 'placeholder' => 'Mobile', 'id' => 'phone_1', 'required', 'autofocus']) !!}
+                                {!! Form::text('phone_1', null, ['class' => 'form-control', 'placeholder' => 'ex: 0179117030', 'id' => 'phone_1', 'required', 'autofocus']) !!}
                                 @if ($errors->has('phone_1'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_1') }}</strong>
@@ -163,7 +163,7 @@
                         <div class="form-group{{ $errors->has('phone_2') ? ' has-error' : '' }}">
                             <label for="phone_2" class="col-sm-4 control-label">Home No</label>
                             <div class="col-sm-6">
-                                {!! Form::text('phone_2', null, ['class' => 'form-control', 'placeholder' => 'Home', 'id' => 'phone_2', 'required', 'autofocus']) !!}
+                                {!! Form::text('phone_2', null, ['class' => 'form-control', 'placeholder' => 'ex: 0377844287', 'id' => 'phone_2', 'required', 'autofocus']) !!}
                                 @if ($errors->has('phone_2'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_2') }}</strong>
@@ -187,7 +187,7 @@
                         <div class="form-group{{ $errors->has('sem_when_registered') ? ' has-error' : '' }}">
                             <label for="sem_when_registered" class="col-sm-4 control-label">Current Sem</label>
                             <div class="col-sm-6">
-                                {!! Form::number('sem_when_registered', null, ['class' => 'form-control', 'placeholder' => 'Current Sem', 'id' => 'sem_when_registered', 'required', 'autofocus']) !!}
+                                {!! Form::number('sem_when_registered', null, ['class' => 'form-control', 'placeholder' => 'Your Current Semester', 'id' => 'sem_when_registered', 'required', 'autofocus']) !!}
                                 @if ($errors->has('sem_when_registered'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('sem_when_registered') }}</strong>
@@ -199,7 +199,7 @@
                         <div class="form-group{{ $errors->has('illness') ? ' has-error' : '' }}">
                             <label for="illness" class="col-sm-4 control-label">Illness</label>
                             <div class="col-sm-6">
-                                {!! Form::textarea('illness', null, ['class' => 'form-control', 'placeholder' => 'please state your illness (if any)', 'id' => 'illness', 'rows' => 3, 'autofocus']) !!}
+                                {!! Form::textarea('illness', null, ['class' => 'form-control', 'placeholder' => 'Please state your illness (insert "None" if does not have illness)', 'id' => 'illness', 'rows' => 3, 'autofocus']) !!}
                                 @if ($errors->has('illness'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('illness') }}</strong>
