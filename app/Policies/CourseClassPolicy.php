@@ -62,7 +62,7 @@ class CourseClassPolicy
     {
         $pivot = auth()->user()->userable->courseClasses()->find($courseClass->id);
 
-        if(Carbon::now() < $courseClass->date){
+        if(Carbon::now() > $courseClass->date){
           return false;
         }
 
