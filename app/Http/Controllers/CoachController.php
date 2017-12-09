@@ -179,6 +179,10 @@ class CoachController extends Controller
             $user->save();
             $user->delete();
 
+            if(!empty($user->userable)){
+              $user->userable->delete();
+            }
+
             return redirect('coachs')->with('success', 'Coach Deleted Sucessfully');
         }
 

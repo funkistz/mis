@@ -46,12 +46,12 @@ $card = $member->memberCard;
                       </div>
 
                       <div class="col-xs-12">
-                        <img src="{{ Auth::user()->profile->avatar }}" class="rounded pull-left" alt="..." width="150px" style="margin:10px;">
+                        <img src="{{ @Auth::user()->profile->avatar }}" class="rounded pull-left" alt="..." width="150px" style="margin:10px;">
                         <table class="table pull-left" style="width:400px;">
                           <tbody>
                             <tr>
                               <th width="120">Name:</th>
-                              <td>{{ $user->name }}</td>
+                              <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                             </tr>
                             <tr>
                               <th >No. K.P.:</th>

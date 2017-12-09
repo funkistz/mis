@@ -27,6 +27,12 @@
         <link rel="stylesheet" href="{{ asset('css/isispa.css')}}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('assets/select2/css/select2.min.css')}}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('assets/select2/css/select2-bootstrap.min.css')}}" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.print.css" type="text/css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.7.0/fullcalendar.min.js"></script>
+
 
         @yield('template_linked_css')
 
@@ -74,5 +80,6 @@
 
         @yield('footer_scripts')
 
+        @stack('scripts')
     </body>
 </html>

@@ -37,6 +37,7 @@ class RegisterMemberRequest extends FormRequest
           'phone_1' => 'required|max:20',
           'phone_2' => 'max:20',
           'education_level_id' => 'required|integer',
+          'sem_when_registered' => 'required|integer',
           'illness' => 'max:255',
 
           'address.line_1' => 'string|required|max:60',

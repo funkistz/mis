@@ -44,7 +44,6 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Username</th>
                                         <th class="hidden-xs">Email</th>
                                         <th class="hidden-xs">Name</th>
                                         <th>Status</th>
@@ -58,11 +57,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach($users as $user)
+                                        @php $user = $user->user; @endphp
                                         <tr>
                                             <td>{{$user->id}}</td>
-                                            <td>{{$user->username}}</td>
                                             <td class="hidden-xs"><a href="mailto:{{ $user->email }}" title="email {{ $user->email }}">{{ $user->email }}</a></td>
-                                            <td class="hidden-xs">{{$user->name}}</td>
+                                            <td class="hidden-xs">{{$user->first_name}} {{$user->last_name}}</td>
                                             <td>
                                               @if ($user->activated == 1)
                                                 <span class="label label-success">
@@ -95,13 +94,19 @@
                                                 </a>
                                             </td>
                                             @role(['officer'])
+                                            @if(empty($user->activated) && $user->userable->member_status_id == 1)
                                             <td>
-                                              @if(empty($user->activated))
                                               {!! Form::open(array('url' => 'members/' . $user->id . '/approve', 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Approve')) !!}
                                                   {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Approve Member</span>', array('class' => 'btn btn-primary btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmApprove', 'data-title' => 'Approve Member', 'data-message' => 'Are you sure you want to approve this member ?')) !!}
                                               {!! Form::close() !!}
-                                              @endif
                                             </td>
+
+                                            <td>
+                                              {!! Form::open(array('url' => 'members/' . $user->id . '/reject', 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Reject')) !!}
+                                                  {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Reject Member</span>', array('class' => 'btn btn-danger btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmApprove', 'data-title' => 'Reject Member', 'data-message' => 'Are you sure you want to reject this member ?')) !!}
+                                              {!! Form::close() !!}
+                                            </td>
+                                            @endif
                                             @endrole
 
                                             @role(['staff'])

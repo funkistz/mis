@@ -86,7 +86,7 @@
 											</div>
 										</div>
 
-										{!! Form::model($user->profile, ['method' => 'PATCH', 'route' => ['profile.update', $user->name],  'class' => 'form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data'  ]) !!}
+										{!! Form::model($user->profile, ['method' => 'PATCH', 'route' => ['profile.update', $user->email],  'class' => 'form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data'  ]) !!}
 
 											{{ csrf_field() }}
 

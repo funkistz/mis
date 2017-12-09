@@ -26,7 +26,7 @@
 					</div>
 					<div class="panel-body">
 
-    					<img src="@if ($user->profile->avatar_status == 1) {{ $user->profile->avatar }} @else {{ Gravatar::get($user->email) }} @endif" alt="{{ $user->name }}" class="user-avatar">
+    					<img src="@if ($user->profile->avatar_status == 1) {{ $user->profile->avatar }} @else {{ Gravatar::get($user->email) }} @endif" alt="{{ $user->first_name }}" class="user-avatar">
 
 						<dl class="user-info">
 
@@ -89,13 +89,13 @@
 						@if ($user->profile)
 							@if (Auth::user()->id == $user->id)
 
-								{!! HTML::icon_link(URL::to('/profile/'.Auth::user()->name.'/edit'), 'fa fa-fw fa-cog', trans('titles.editProfile'), array('class' => 'btn btn-small btn-info btn-block')) !!}
+								{!! HTML::icon_link(URL::to('/profile/'.Auth::user()->email.'/edit'), 'fa fa-fw fa-cog', trans('titles.editProfile'), array('class' => 'btn btn-small btn-info btn-block')) !!}
 
 							@endif
 						@else
 
 							<p>{{ trans('profile.noProfileYet') }}</p>
-							{!! HTML::icon_link(URL::to('/profile/'.Auth::user()->name.'/edit'), 'fa fa-fw fa-plus ', trans('titles.createProfile'), array('class' => 'btn btn-small btn-info btn-block')) !!}
+							{!! HTML::icon_link(URL::to('/profile/'.Auth::user()->email.'/edit'), 'fa fa-fw fa-plus ', trans('titles.createProfile'), array('class' => 'btn btn-small btn-info btn-block')) !!}
 
 						@endif
 

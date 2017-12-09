@@ -4,6 +4,7 @@ namespace App\Traits;
 use Carbon\Carbon;
 use App\Models\Member;
 use App\Models\Course;
+use App\Models\CourseClass;
 use Khill\Lavacharts\Lavacharts;
 
 trait ReportTrait
@@ -36,7 +37,7 @@ trait ReportTrait
 
     public function courseChart($year)
     {
-        $course = Course::withCount('members')->get();
+        $course = CourseClass::withCount('membersAccepted')->get();
 
         $lava = new Lavacharts;
 
@@ -44,7 +45,7 @@ trait ReportTrait
         $course_data->addStringColumn('Course')->addNumberColumn('Member');
 
         foreach ($course as $key => $value) {
-            $course_data->addRow([$value->name,  $value->members_count]);
+            $course_data->addRow([$value->name,  $value->members_accepted_count]);
         }
 
         return $course_data;

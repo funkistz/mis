@@ -17,6 +17,13 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+
+        if (auth()->user()->hasRole('member')) {
+          if(auth()->user()->userable->member_status_id == 1 || auth()->user()->userable->member_status_id == 3){
+            return redirect( route('activation-required') );
+          }
+        }
+
         $data = [
         ];
 

@@ -97,6 +97,7 @@ Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () 
     Route::group(['middleware' => ['role:staff|officer|coofficer']], function () {
       Route::resource('/members', 'MemberController');
       Route::post('/members/{id}/approve', 'MemberController@approveMember');
+      Route::post('/members/{id}/reject', 'MemberController@rejectMember');
     });
 
     Route::group(['middleware' => ['role:staff|officer']], function () {

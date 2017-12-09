@@ -93,12 +93,14 @@
                                 <div class="user-avatar-nav"></div>
                             @endif
 
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->first_name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li {{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'class=active' : null }}>
-                                {!! HTML::link(url('/profile/'.Auth::user()->name), trans('titles.profile')) !!}
+                            @if(auth()->user()->activated == 1)
+                            <li {{ Request::is('profile/'.Auth::user()->email, 'profile/'.Auth::user()->email . '/edit') ? 'class=active' : null }}>
+                                {!! HTML::link(url('/profile/'.Auth::user()->email), trans('titles.profile')) !!}
                             </li>
+                            @endif
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

@@ -184,6 +184,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('sem_when_registered') ? ' has-error' : '' }}">
+                            <label for="sem_when_registered" class="col-sm-4 control-label">Current Sem</label>
+                            <div class="col-sm-6">
+                                {!! Form::number('sem_when_registered', null, ['class' => 'form-control', 'placeholder' => 'Current Sem', 'id' => 'sem_when_registered', 'required', 'autofocus']) !!}
+                                @if ($errors->has('sem_when_registered'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sem_when_registered') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('illness') ? ' has-error' : '' }}">
                             <label for="illness" class="col-sm-4 control-label">Illness</label>
                             <div class="col-sm-6">

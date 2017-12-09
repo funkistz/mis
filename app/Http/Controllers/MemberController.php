@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Member;
 use jeremykenedy\LaravelRoles\Models\Role;
 use Validator;
 use App\Traits\CaptureIpTrait;
@@ -22,12 +23,14 @@ class MemberController extends Controller
     {
         $status = @$request->get('status');
         $coach = @$request->get('coach');
+        $course = @$request->get('course');
+        $attend_course = @$request->get('attend_course');
 
         if(isset($status)){
-          $users = User::where([
-            ['userable_type', 'App\Models\Member'],
-            ['activated', $status]
-          ])->get();
+
+          $users = Member::whereHas('user', function ($query) use($status) {
+              $query->where('activated', $status);
+          })->get();
 
           if($status == 0){
             $member_type = 'Member That Waiting For Approval';
@@ -36,15 +39,15 @@ class MemberController extends Controller
           }
         }else if(isset($coach)){
 
-          $user_before = User::where([
-            ['userable_type', 'App\Models\Member']
-          ])->get();
+          $user_before = Member::whereHas('user', function ($query) use($status) {
+              $query->where('activated', 1);
+          })->get();
           $users = collect();
 
           if($coach == 0){
 
             foreach ($user_before as $key => $user) {
-              if($user->userable->coaches->count() == 0){
+              if($user->coaches->count() == 0){
                 $users->push($user);
               }
             }
@@ -54,15 +57,59 @@ class MemberController extends Controller
           }else{
 
             foreach ($user_before as $key => $user) {
-              if($user->userable->coaches->count() > 0){
+              if($user->coaches->count() > 0){
                 $users->push($user);
               }
             }
 
             $member_type = 'Member With Coach';
           }
+
+        }else if(isset($course)){
+
+          $user_before = Member::whereHas('user', function ($query) use($status) {
+              $query->where('activated', 1);
+          })->get();
+          $users = collect();
+
+          foreach ($user_before as $key => $user) {
+            if($user->courseClasses->count() == 0){
+              $users->push($user);
+            }
+          }
+-
+          $member_type = 'Member do not have course';
+
+        }else if(isset($attend_course)){
+
+          $user_before = Member::whereHas('user', function ($query) use($status) {
+              $query->where('activated', 1);
+          })->get();
+          $users = collect();
+
+          if($attend_course == 0){
+
+            foreach ($user_before as $key => $user) {
+              if($user->notAttendedCourseClasses->count() > 0){
+                $users->push($user);
+              }
+            }
+
+            $member_type = 'Member not attend course';
+
+          }else{
+
+            foreach ($user_before as $key => $user) {
+              if($user->attendedCourseClasses->count() > 0){
+                $users->push($user);
+              }
+            }
+
+            $member_type = 'Member attend course';
+          }
+
         }else{
-          $users = User::where('userable_type', 'App\Models\Member')->get();
+          $users = Member::all();
           $member_type = 'Members';
         }
 
@@ -123,8 +170,8 @@ class MemberController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $user_course = $user->userable->courses->pluck('id')->toArray();
-        $user_coach = $user->userable->coaches->pluck('id')->toArray();
+        $user_course = (!empty($user->userable->courses))? $user->userable->courses->pluck('id')->toArray():null;
+        $user_coach = (!empty($user->userable->coaches))? $user->userable->coaches->pluck('id')->toArray():null;
 
         $data = [
             'user' => $user,
@@ -228,6 +275,10 @@ class MemberController extends Controller
             $user->save();
             $user->delete();
 
+            if(!empty($user->userable)){
+              $user->userable->delete();
+            }
+
             return redirect('members')->with('success', trans('usersmanagement.deleteSuccess'));
         }
 
@@ -250,12 +301,38 @@ class MemberController extends Controller
             'activated' => true
           ]);
 
+          $user->userable->update([
+            'member_status_id' => 2
+          ]);
+
           Profile::create([
             'user_id' => $id,
             'theme_id' => 1,
           ]);
 
           return redirect('members')->with('success', 'Member Approved');
+      }
+
+      return back()->with('error', 'Some error occured');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function rejectMember($id)
+    {
+      $currentUser = auth()->user();
+      $user = User::findOrFail($id);
+
+      if ($user->id != $currentUser->id) {
+          $user->userable->update([
+            'member_status_id' => 3
+          ]);
+
+          return redirect('members')->with('success', 'Member Rejected');
       }
 
       return back()->with('error', 'Some error occured');
