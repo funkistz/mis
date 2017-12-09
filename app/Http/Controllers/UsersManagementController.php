@@ -34,12 +34,12 @@ class UsersManagementController extends Controller
         if(!empty($role)){
           $users = User::whereHas('roles', function ($query) use($role) {
               $query->where('slug', $role);
-              $query->where('roles.id', '!=' , 6);
+              $query->whereNotIn('roles.id', [6, 7]);
           })->get();
           $role_name = ucfirst($role);
         }else{
           $users = User::whereHas('roles', function ($query) {
-              $query->where('roles.id', '!=' , 6);
+              $query->whereNotIn('roles.id', [6, 7]);
           })->get();
           $role_name = 'User';
         }
@@ -243,6 +243,10 @@ class UsersManagementController extends Controller
             $user->deleted_ip_address = $ipAddress->getClientIp();
             $user->save();
             $user->delete();
+
+            if(!empty($user->userable)){
+              $user->userable->delete();
+            }
 
             $log = 'Deleted user ' . $user->name;
             AdminLog::create([

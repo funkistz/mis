@@ -39,7 +39,7 @@
       \DB::table('course_class_member')->where('accepted','!=', NULL)->get()
     ),
     'title' => 'Members attend courses',
-    'footer_link' => route('members.index', ['course' => 0]),
+    'footer_link' => route('members.index', ['attend_course' => 1]),
   ])
   @endcomponent
 </div>
@@ -50,7 +50,7 @@
       \DB::table('course_class_member')->where('accepted', NULL)->get()
     ),
     'title' => 'Members not attend courses',
-    'footer_link' => route('members.index', ['course' => 0]),
+    'footer_link' => route('members.index', ['attend_course' => 0]),
   ])
   @endcomponent
 </div>

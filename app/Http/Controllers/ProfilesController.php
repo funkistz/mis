@@ -63,7 +63,7 @@ class ProfilesController extends Controller
      */
     public function getUserByUsername($username)
     {
-        return User::with('profile')->wherename($username)->firstOrFail();
+        return User::with('profile')->where('email', $username)->firstOrFail();
     }
 
     /**
@@ -81,11 +81,12 @@ class ProfilesController extends Controller
             abort(404);
         }
 
-        $currentTheme = Theme::find($user->profile->theme_id);
+        // dd($user);
+
+        // $currentTheme = Theme::find($user->profile->theme_id);
 
         $data = [
             'user'         => $user,
-            'currentTheme' => $currentTheme,
         ];
 
         return view('profiles.show')->with($data);
@@ -168,7 +169,7 @@ class ProfilesController extends Controller
 
         $user->save();
 
-        return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updateSuccess'));
+        return redirect('profile/'.$user->email.'/edit')->with('success', trans('profile.updateSuccess'));
     }
 
     /**

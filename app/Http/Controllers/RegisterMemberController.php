@@ -11,6 +11,7 @@ use App\Models\EducationLevel;
 use App\Models\Country;
 use App\Models\User;
 use App\Models\Member;
+use App\Models\Profile;
 
 use App\Http\Requests\RegisterMemberRequest;
 
@@ -72,6 +73,8 @@ class RegisterMemberController extends Controller
     {
         // dd($request->all());
 
+        $request['member_status_id'] = 1;
+
         DB::beginTransaction();
 
         try {
@@ -87,7 +90,9 @@ class RegisterMemberController extends Controller
             'phone_1',
             'phone_2',
             'education_level_id',
-            'illness'
+            'sem_when_registered',
+            'illness',
+            'member_status_id'
             ]
           ));
 
@@ -116,6 +121,10 @@ class RegisterMemberController extends Controller
 
           // dd($address);
           $user->addAddress($address);
+
+          $profile = new Profile();
+          $user->profile()->save($profile);
+          $user->save();
 
         } catch(\Exception $e) {
           DB::rollback();

@@ -80,7 +80,11 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+          'courses' => Course::all()->pluck('name', 'id')->toArray(),
+          'course' => CourseClass::find($id)
+        ];
+        return view('course.update')->with($data);
     }
 
     /**
@@ -92,7 +96,15 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        CourseClass::find($id)->update($request->only([
+          'course_id',
+          'name',
+          'date',
+          'description',
+          'venue'
+        ]));
+
+        return redirect()->route('courses.index');
     }
 
     /**

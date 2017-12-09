@@ -28,13 +28,13 @@ class ReportController extends Controller
         $course_data = $this->courseChart($request['year']);
         $year_selection = $this->getMemberYearSelection();
 
-        $column = $lava->ColumnChart('columnchart', $member_data, []);
+        $column = $lava->BarChart('columnchart', $member_data, ['height' => 400]);
         $areachart = $lava->AreaChart('areachart', $member_data, []);
-        $piechart = $lava->PieChart('piechart', $member_data, []);
+        $piechart = $lava->PieChart('piechart', $member_data, ['height' => 400]);
 
         $coursechart = $lava->ColumnChart('coursechart', $course_data, []);
         $lava->AreaChart('courseareachart', $course_data, []);
-        $lava->PieChart('coursepiechart', $course_data, []);
+        $lava->PieChart('coursepiechart', $course_data, ['height' => 400]);
 
         $data = [
           'lava' => $lava,

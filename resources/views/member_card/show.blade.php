@@ -46,12 +46,12 @@ $card = $member->memberCard;
                       </div>
 
                       <div class="col-xs-12">
-                        <img src="{{ Auth::user()->profile->avatar }}" class="rounded pull-left" alt="..." width="150px" style="margin:10px;">
+                        <img src="{{ @Auth::user()->profile->avatar }}" class="rounded pull-left" alt="..." width="150px" style="margin:10px;">
                         <table class="table pull-left" style="width:400px;">
                           <tbody>
                             <tr>
-                              <th width="120">Nama:</th>
-                              <td>{{ $user->name }}</td>
+                              <th width="120">Name:</th>
+                              <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                             </tr>
                             <tr>
                               <th >No. K.P.:</th>
@@ -63,14 +63,10 @@ $card = $member->memberCard;
                             </tr>
                             <tr>
                               <th>Daerah/Unit:</th>
-                              <td>MARANG</td>
+                              <td>DUNGUN</td>
                             </tr>
                             <tr>
                               <th>Tarikh Lantikan:</th>
-                              <td>{{ $card->induction->format('d.m.o') }}</td>
-                            </tr>
-                            <tr>
-                              <th>Jenis Darah:</th>
                               <td>{{ $card->induction->format('d.m.o') }}</td>
                             </tr>
                           </tbody>

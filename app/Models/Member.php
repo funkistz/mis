@@ -44,6 +44,7 @@ class Member extends Model
         'mar_stat',
         'unif_stat',
         'member_status_id',
+        'sem_when_registered',
         'member_card_id',
     ];
 
@@ -109,5 +110,15 @@ class Member extends Model
     public function courseClasses()
     {
         return $this->belongsToMany(CourseClass::class)->withPivot('accepted', 'fixed');
+    }
+
+    public function attendedCourseClasses()
+    {
+        return $this->belongsToMany(CourseClass::class)->withPivot('accepted', 'fixed')->wherePivot('accepted', '!=' , null);
+    }
+
+    public function notAttendedCourseClasses()
+    {
+        return $this->belongsToMany(CourseClass::class)->withPivot('accepted', 'fixed')->wherePivot('accepted', null);
     }
 }

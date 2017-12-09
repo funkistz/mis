@@ -81,9 +81,8 @@
                     <h4>Number of students registered per month</h4>
                   </div>
                   <div class="panel-body">
-                    <div id="poll_div"></div>
                     <div id="chart-div"></div>
-                    {!! $lava->render('ColumnChart', 'columnchart', 'chart-div') !!}
+                    {!! $lava->render('BarChart', 'columnchart', 'chart-div') !!}
                   </div>
                 </div>
             </div>
@@ -94,7 +93,6 @@
                     <h4>Number of students registered per month</h4>
                   </div>
                   <div class="panel-body">
-                    <div id="poll_div"></div>
                     <div id="chart-div2"></div>
                     {!! $lava->render('AreaChart', 'areachart', 'chart-div2') !!}
                   </div>
@@ -107,7 +105,6 @@
                     <h4>Number of students registered per month</h4>
                   </div>
                   <div class="panel-body">
-                    <div id="poll_div"></div>
                     <div id="chart-div3"></div>
                     {!! $lava->render('PieChart', 'piechart', 'chart-div3') !!}
                   </div>
@@ -174,6 +171,8 @@
       $('#barchart2').addClass('hide');
       $('#linechart2').addClass('hide');
       $('#piechart2').addClass('hide');
+
+      window.dispatchEvent(new Event('resize'));
     }
 
     $('#toggle-barchart').on('click', function(){

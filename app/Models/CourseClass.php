@@ -51,4 +51,9 @@ class CourseClass extends Model
     {
         return $this->belongsToMany(Member::class)->withPivot('accepted','fixed');
     }
+
+    public function membersAccepted()
+    {
+        return $this->belongsToMany(Member::class)->wherePivot('accepted', '!=', null)->withPivot('accepted','fixed');
+    }
 }

@@ -68,23 +68,6 @@
             <div class="clearfix"></div>
             <div class="border-bottom"></div>
 
-            @if ($user->username)
-
-              <div class="col-sm-5 col-xs-6 text-larger">
-                <strong>
-                  {{ trans('usersmanagement.labelUserName') }}
-                </strong>
-              </div>
-
-              <div class="col-sm-7">
-                {{ $user->username }}
-              </div>
-
-              <div class="clearfix"></div>
-              <div class="border-bottom"></div>
-
-            @endif
-
             @if ($user->email)
 
             <div class="col-sm-5 col-xs-6 text-larger">
@@ -166,6 +149,158 @@
                   Not-Activated
                 </span>
               @endif
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Race
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->race->name }}
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Date of birth
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->date_of_birth }}
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Place of birth
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->place_of_birth }}
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                IC
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->nric }}
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Nationality
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->nationality->name }}
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Phone no
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->phone_1 }}
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Home no
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->phone_2 }}
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Education level
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->educationLevel->name }}
+              </ul>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="border-bottom"></div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Illness
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->userable->illness }}
+              </ul>
+            </div>
+
+            <div class="col-sm-5 col-xs-6 text-larger">
+              <strong>
+                Address
+              </strong>
+            </div>
+
+            <div class="col-sm-7">
+              <ul class="list-group">
+                {{ $user->getPrimaryAddress()->line_1 }}<br>
+                {{ $user->getPrimaryAddress()->line_2 }}<br>
+                {{ $user->getPrimaryAddress()->post_code }}<br>
+                {{ $user->getPrimaryAddress()->city }}<br>
+                {{ $user->getPrimaryAddress()->state }}<br>
+                {{ $user->getPrimaryAddress()->country->name }}<br>
+              </ul>
             </div>
 
             <div class="clearfix"></div>
