@@ -54,7 +54,11 @@ class MemberCourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = [
+          'course' => CourseClass::find($id)
+        ];
+
+        return view('course.member_show')->with($data);
     }
 
     /**

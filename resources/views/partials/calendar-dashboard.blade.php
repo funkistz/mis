@@ -17,7 +17,30 @@ $(document).ready(function() {
     // page is now ready, initialize the calendar...
 
     $('#calendar').fullCalendar({
-        // put your options and callbacks here
+      header: {
+				left: 'prev',
+				center: 'title',
+				right: 'next'
+			},
+			defaultView: 'month',
+			editable: true,
+      events: [
+        @foreach( App\Models\CourseClass::all() as $course )
+				{
+					title: '{{ $course->name }}',
+          start: '{{ $course->date }}',
+					id: '{{ $course->id }}'
+				}
+        @endforeach
+			],
+      eventRender: function(event, element) {
+          $(element).tooltip({title: event.title});
+      },
+      eventClick: function(calEvent, jsEvent, view) {
+
+        window.location.href = "{{ url('courses') }}/" + calEvent.id;
+
+    }
     })
 
 });

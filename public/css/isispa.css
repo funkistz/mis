@@ -1,3 +1,17 @@
+/* can be edit here */
+
+/* background color */
+body{
+  background-color: #ffffff;
+}
+
+/* navbar color */
+.navbar-default {
+    background-color: #ffffff;
+}
+
+/* end edit */
+
 .navbar-default{
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }

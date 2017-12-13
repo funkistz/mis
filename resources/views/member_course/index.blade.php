@@ -64,12 +64,12 @@
                                               @can('acceptCourse', $course)
                                                 {!! Form::open(array('url' => 'member_courses/' . $course->id . '?status=1', 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Accept')) !!}
                                                     {!! Form::hidden('_method', 'PUT') !!}
-                                                    {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Accept</span>', array('class' => 'btn btn-primary btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => 'Accept Course', 'data-message' => 'Are you sure you want to accept this Course ?')) !!}
+                                                    {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Accept</span>', array('class' => 'btn btn-primary btn-sm margin-bottom-xs','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => 'Accept Course', 'data-message' => 'Are you sure you want to accept this Course ?')) !!}
                                                 {!! Form::close() !!}
 
                                                 {!! Form::open(array('url' => 'member_courses/' . $course->id . '?status=0', 'class' => '', 'data-toggle' => 'tooltip', 'title' => 'Decline')) !!}
                                                     {!! Form::hidden('_method', 'PUT') !!}
-                                                    {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Decline</span>', array('class' => 'btn btn-danger btn-sm','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => 'Decline Course', 'data-message' => 'Are you sure you want to decline this Course ?')) !!}
+                                                    {!! Form::button('<i class="fa fa-check fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Decline</span>', array('class' => 'btn btn-danger btn-sm margin-bottom-xs','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmSave', 'data-title' => 'Decline Course', 'data-message' => 'Are you sure you want to decline this Course ?')) !!}
                                                 {!! Form::close() !!}
                                               @else
                                                 @if(!empty($course->pivot->accepted))
@@ -78,6 +78,8 @@
                                                   <span class="label label-danger">Declined</span>
                                                 @endif
                                               @endcan
+
+                                              <a class="btn btn-primary" href="{{ route('member_courses.show', $course->id) }}" >View</a>
                                             </td>
                                     @endforeach
                                 </tbody>
