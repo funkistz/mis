@@ -72,7 +72,7 @@ $card = $member->memberCard;
                             </tr>
                             <tr>
                               <th>Daerah/Unit:</th>
-                              <td>DUNGUN</td>
+                              <td>MARANG</td>
                             </tr>
                             <tr>
                               <th>Tarikh Lantikan:</th>

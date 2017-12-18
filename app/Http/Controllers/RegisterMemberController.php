@@ -28,6 +28,7 @@ class RegisterMemberController extends Controller
       	  'Johor' => 'Johor',
           'Kedah' => 'Kedah',
           'Kelantan' => 'Kelantan',
+          'Terengganu' => 'Terengganu',
           'Melaka' => 'Melaka',
           'Negeri Sembilan' => 'Negeri Sembilan',
           'Pahang' => 'Pahang',

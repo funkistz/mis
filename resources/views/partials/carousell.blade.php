@@ -6,10 +6,19 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner">
+    <div class="carousel-inner" role="listbox" style=" width:100%; height: 200px !important;">
       <div class="item active">
-        <img src="{{ asset('images/banner.jpg') }}" alt="isispa">
+        <img src="{{ asset('images/banner.jpg') }}" alt="isispa"> 
       </div>
+        <div class="item">
+          <img src="{{ asset('images/HEADERBLOG.jpg') }}" alt="isispa">
+        </div>
+        <div class="item">
+          <img src="{{ asset('images/banner999.jpg') }}" alt="isispa">
+        </div>
+        <div class="item">
+          <img src="{{ asset('images/sertai-jpam.jpg') }}" alt="isispa">
+        </div>
     </div>
 
     <!-- Left and right controls -->

@@ -2,12 +2,17 @@
 
 /* background color */
 body{
-  background-color: #ffffff;
+  background-color: #1F618D;
+  background-image:url('../images/1282538.jpg');
+  background-attachment:fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* navbar color */
 .navbar-default {
-    background-color: #ffffff;
+    background-color: #1A5276
+    color: #ffffff;
 }
 
 /* end edit */
