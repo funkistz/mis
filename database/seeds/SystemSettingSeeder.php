@@ -40,7 +40,21 @@ class SystemSettingSeeder extends Seeder
             'name' => 'member card length',
             'field' => 'member_card_length',
             'type' => 1,
-            'value' => 6, 
+            'value' => 6,
+            'is_active' => 1,
+            'created_at' => date('Y-m-d H:i:s')
+          ],[
+            'name' => 'session 2 semester start',
+            'field' => 'session_2_semester_start',
+            'type' => 1,
+            'value' => "1/3",
+            'is_active' => 1,
+            'created_at' => date('Y-m-d H:i:s')
+          ],[
+            'name' => 'session 2 semester start',
+            'field' => 'session_2_semester_start',
+            'type' => 1,
+            'value' => "1/9",
             'is_active' => 1,
             'created_at' => date('Y-m-d H:i:s')
           ]

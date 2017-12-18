@@ -19,7 +19,8 @@
                 'searchable': false,
                 'aTargets': ['no-search'],
                 'bTargets': ['no-sort']
-            }]
+            }],
+            "order": [[ 0, 'desc' ]]
         });
     });
 </script>

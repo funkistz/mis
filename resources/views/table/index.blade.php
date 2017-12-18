@@ -63,7 +63,7 @@
                 </div>
                 <div class="panel-body">
                   <div class="table-responsive users-table">
-                      <table class="table table-striped table-condensed data-table">
+                      <table class="table table-striped table-condensed data-table" id="table-member">
                           <thead>
                               <tr>
                                   <th>ID</th>
@@ -105,7 +105,7 @@
 @endsection
 
 @section('footer_scripts')
-
+    @include('scripts.datatables')
     @include('scripts.delete-modal-script')
     @include('scripts.save-modal-script')
     {{--

@@ -16,7 +16,7 @@ class TableController extends Controller
     public function index()
     {
         $data = [
-          'users' => User::where('userable_type', Member::class)->get()
+          'users' => User::where('userable_type', Member::class)->get()->sortByDesc('created_at')
         ];
 
         return view('table.index')->with($data);

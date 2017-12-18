@@ -2,8 +2,8 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Member extends Model
 {
@@ -49,6 +49,7 @@ class Member extends Model
     ];
 
     protected $dates = [
+        'created_at',
         'deleted_at',
         'date_of_birth'
     ];
@@ -120,5 +121,23 @@ class Member extends Model
     public function notAttendedCourseClasses()
     {
         return $this->belongsToMany(CourseClass::class)->withPivot('accepted', 'fixed')->wherePivot('accepted', null);
+    }
+
+    public function getCurrentSemesterAttribute()
+    {
+        $now = Carbon::now();
+        $first_sem_date = 3;
+        $created_at = Carbon::createFromTimestamp(strtotime($this->attributes['created_at']));
+
+        if($created_at->format('j') >= 9){
+          $first_sem_date = 9;
+        }
+
+        $created_at->day = 1;
+        $created_at->month = $first_sem_date;
+
+        return round($created_at->diffInMonths($now)/6, 0, PHP_ROUND_HALF_DOWN) + $this->attributes['sem_when_registered'];
+
+
     }
 }
