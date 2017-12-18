@@ -114,7 +114,7 @@ class MemberController extends Controller
         }
 
         $data = [
-          'users' => $users,
+          'users' => $users->sortByDesc('created_at'),
           'member_type' => $member_type,
           'roles' => Role::all()
         ];
@@ -219,7 +219,6 @@ class MemberController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $user->name = '';
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
 
