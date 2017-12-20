@@ -37,7 +37,8 @@ trait ReportTrait
 
     public function courseChart($year)
     {
-        $course = CourseClass::withCount('membersAccepted')->get();
+        $course = CourseClass::withCount('membersAccepted')
+        ->whereYear('created_at', $year)->get();
 
         $lava = new Lavacharts;
 
@@ -104,11 +105,11 @@ trait ReportTrait
         return $userArr;
     }
 
-    public function getMemberCourseData(){
+    public function getMemberCourseData($year){
         $members = Member::whereHas('user', function ($query) {
             $query->where('activated', true);
         })
-        ->whereYear('created_at', '2017')
+        ->whereYear('created_at', $year)
         ->select('id', 'created_at')
         ->get()
         ->groupBy(function($date) {

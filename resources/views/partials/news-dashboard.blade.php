@@ -30,7 +30,7 @@
             @endif
             @endrole
           </h4>
-          <small>by {{ $news->user->name }}</small><br>
+          <small>by {{ $news->user->name }} at {{ $news->created_at->format('d M Y H:i') }}</small><br>
           {{ $news->description }}
         </div>
         <br>
