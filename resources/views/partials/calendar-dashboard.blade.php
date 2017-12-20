@@ -30,7 +30,7 @@ $(document).ready(function() {
 					title: '{{ $course->name }}',
           start: '{{ $course->date }}',
 					id: '{{ $course->id }}'
-				}
+				},
         @endforeach
 			],
       eventRender: function(event, element) {
