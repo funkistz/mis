@@ -3,7 +3,7 @@
     <div class="panel-heading">News</div>
     <div class="panel-body">
       @php
-        $news = App\Models\News::where('is_active', 1)->with('user')->get();
+        $news = App\Models\News::where('is_active', 1)->with('user')->orderBy('created_at', 'desc')->get();
       @endphp
 
       <div class="media">
