@@ -82,7 +82,7 @@
                   </div>
                   <div class="panel-body">
                     <div id="chart-div"></div>
-                    {!! $lava->render('BarChart', 'columnchart', 'chart-div') !!}
+                    {!! $lava->render('ColumnChart', 'columnchart', 'chart-div') !!}
                   </div>
                 </div>
             </div>

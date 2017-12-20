@@ -77,7 +77,7 @@
             <div class="col-sm-7">
               <ul class="list-group">
                 @foreach ($course->members as $member)
-                <li class="list-group-item">{{ $loop->index+1 . '. ' . $member->user->name }}</li>
+                <li class="list-group-item">{{ $loop->index+1 . '. ' . $member->user->first_name . ' ' . $member->user->last_name }}</li>
                 @endforeach
               </ul>
             </div>
