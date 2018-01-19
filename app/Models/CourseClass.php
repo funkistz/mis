@@ -49,7 +49,7 @@ class CourseClass extends Model
 
     public function members()
     {
-        return $this->belongsToMany(Member::class)->withPivot('accepted','fixed');
+        return $this->belongsToMany(Member::class)->withPivot('accepted','fixed', 'attendance');
     }
 
     public function membersAccepted()

@@ -100,6 +100,8 @@ Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () 
       Route::post('/members/{id}/reject', 'MemberController@rejectMember');
     });
 
+    Route::post('/courses/{id}/attendance/{member_id}', 'CourseController@updateAttendance')->name('courses.attendance.update');
+    
     Route::group(['middleware' => ['role:staff|officer']], function () {
       Route::resource('/courses', 'CourseController');
     });
@@ -131,6 +133,8 @@ Route::group(['middleware'=> ['auth', 'activated', 'currentUser']], function () 
       ]);
       Route::get('/members/{id}/assign', 'AssignCourseController@edit');
     });
+
+
 
 });
 

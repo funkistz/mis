@@ -121,4 +121,13 @@ class CourseController extends Controller
         return redirect('courses')->with('success', 'Course Deleted Successfully');
 
     }
+
+    public function updateAttendance(Request $request, $id, $member_id)
+    {
+        $course = CourseClass::findOrFail($id);
+        $course->members()->syncWithoutDetaching([$member_id => ['attendance' => $request['attendance']]]);
+
+        return 'success';
+
+    }
 }

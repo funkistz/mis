@@ -75,11 +75,48 @@
             </div>
 
             <div class="col-sm-7">
-              <ul class="list-group">
+              <ul class="list-group hidden-print">
                 @foreach ($course->members as $member)
-                <li class="list-group-item">{{ $loop->index+1 . '. ' . $member->user->first_name . ' ' . $member->user->last_name }}</li>
+                <li class="list-group-item">{{ $loop->index+1 . '. ' . $member->user->first_name . ' ' . $member->user->last_name }}
+                  <div class="pull-right">
+                    <!-- <button class="btn btn-sm btn-success action-attendance" data-id="{{ $course->id }}" data-member-id="{{ $member->id }}" data-attendance="1" >Attend</button>
+                    <button class="btn btn-sm btn-danger action-attendance" data-id="{{ $course->id }}" data-member-id="{{ $member->id }}" data-attendance="2" >Not Attend</button> -->
+                    <label class="radio-inline">
+                      <input class="action-attendance" type="radio"
+                      name="attendance" data-id="{{ $course->id }}" data-member-id="{{ $member->id }}" data-attendance="1" {{ ($member->pivot->attendance == 1)? 'checked':'' }}>Attend
+                    </label>
+                    <label class="radio-inline">
+                      <input class="action-attendance" type="radio"
+                      name="attendance" data-id="{{ $course->id }}" data-member-id="{{ $member->id }}" data-attendance="2" {{ ($member->pivot->attendance == 2)? 'checked':'' }}>Not Attend
+                    </label>
+                  </div>
+                </li>
                 @endforeach
               </ul>
+              <table class="table visible-print-inline" style="width:100%;">
+                <thead>
+                  <th>no.</th>
+                  <th>Name</th>
+                  <th>Attedance</th>
+                </thead>
+                <tbody>
+                  @foreach ($course->members as $member)
+                  <tr>
+                    <td>{{ $loop->index+1 }}</td>
+                    <td>{{ $member->user->first_name . ' ' . $member->user->last_name }}</td>
+                    <td id="row-{{ $member->id }}">
+                      @if($member->pivot->attendance == 1)
+                      Attend
+                      @elseif($member->pivot->attendance == 2)
+                      Not Attend
+                      @else
+                      N/A
+                      @endif
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+                <table>
             </div>
 
           </div>
@@ -96,5 +133,37 @@
 @section('footer_scripts')
 
   @include('scripts.delete-modal-script')
+  <script>
+  $(function() {
+     $('.action-attendance').click(function() {
+
+       var course_id = $(this).data('id');
+       var course_member_id = $(this).data('member-id');
+       var attendance = $(this).data('attendance');
+
+       $.ajax({
+           type: "POST",
+           url:'{{ url('courses') }}/' + course_id + '/attendance/' + course_member_id,
+           data: {attendance:attendance},
+           headers: {
+               'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+           },
+           success:function(data){
+              if(attendance == 1 ){
+                $('#row-' + course_member_id).html('Attend')
+              }
+
+              if(attendance == 2 ){
+                $('#row-' + course_member_id).html('Not Attend')
+              }
+               console.log(data);
+           },
+           error: function(data){
+              alert('Some error occured');
+           }
+       });
+      });
+  });
+  </script>
 
 @endsection

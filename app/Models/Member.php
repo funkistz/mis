@@ -95,7 +95,7 @@ class Member extends Model
 
     public function courses()
     {
-        return $this->belongsToMany('App\Models\Course')->withPivot('accepted');
+        return $this->belongsToMany('App\Models\Course')->withPivot('accepted', 'attendance');
     }
 
     public function coaches()
