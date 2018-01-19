@@ -84,11 +84,13 @@
                     <button class="btn btn-sm btn-danger action-attendance" data-id="{{ $course->id }}" data-member-id="{{ $member->id }}" data-attendance="2" >Not Attend</button> -->
                     <label class="radio-inline">
                       <input class="action-attendance" type="radio"
-                      name="attendance" data-id="{{ $course->id }}" data-member-id="{{ $member->id }}" data-attendance="1" {{ ($member->pivot->attendance == 1)? 'checked':'' }}>Attend
+                      name="attendance-{{ $member->id }}" data-id="{{ $course->id }}" value="1"
+                      data-member-id="{{ $member->id }}" data-attendance="1" {{ ($member->pivot->attendance == 1)? 'checked':'' }}>Attend
                     </label>
                     <label class="radio-inline">
                       <input class="action-attendance" type="radio"
-                      name="attendance" data-id="{{ $course->id }}" data-member-id="{{ $member->id }}" data-attendance="2" {{ ($member->pivot->attendance == 2)? 'checked':'' }}>Not Attend
+                      name="attendance-{{ $member->id }}" data-id="{{ $course->id }}" value="2"
+                      data-member-id="{{ $member->id }}" data-attendance="2" {{ ($member->pivot->attendance == 2)? 'checked':'' }}>Not Attend
                     </label>
                   </div>
                 </li>
@@ -136,7 +138,7 @@
   @include('scripts.delete-modal-script')
   <script>
   $(function() {
-     $('.action-attendance').click(function() {
+     $('.action-attendance').change(function() {
 
        var course_id = $(this).data('id');
        var course_member_id = $(this).data('member-id');
