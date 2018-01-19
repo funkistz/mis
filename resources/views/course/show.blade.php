@@ -13,10 +13,11 @@
         <div class="panel panel-success">
 
           <div class="panel-heading">
-            <a href="/courses/" class="btn btn-primary btn-xs pull-right">
+            <a href="/courses/" class="btn btn-primary btn-xs pull-right hidden-print">
               <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
               <span class="hidden-xs">Back to Courses</span>
             </a>
+            <button class="btn btn-xs btn-default pull-right hidden-print pull-right" onclick="window.print()" style="margin-right:5px;">Print</button>
             Course Information
           </div>
           <div class="panel-body">
