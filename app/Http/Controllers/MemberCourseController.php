@@ -22,6 +22,7 @@ class MemberCourseController extends Controller
           'members' => $member
         ];
 
+
         return view('member_course.index')->with($data);
     }
 

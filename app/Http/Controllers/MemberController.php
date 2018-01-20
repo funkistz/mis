@@ -170,8 +170,8 @@ class MemberController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $user_course = (!empty($user->userable->courses))? $user->userable->courses->pluck('id')->toArray():null;
-        $user_coach = (!empty($user->userable->coaches))? $user->userable->coaches->pluck('id')->toArray():null;
+        $user_course = (!empty($user->userable->courseClasses))? $user->userable->courseClasses->pluck('id')->toArray():null;
+        $user_coach = (!empty($user->userable->courseClasses))? $user->userable->courseClasses->pluck('id')->toArray():null;
 
         $data = [
             'user' => $user,
@@ -180,6 +180,7 @@ class MemberController extends Controller
             'course' => Course::all()->pluck('name','id')->toArray(),
             'coach' => Coach::join('users', 'coaches.id', '=', 'users.userable_id')->select('coaches.id', 'users.name')->pluck('name','id')->toArray()
         ];
+
 
         return view('member.edit')->with($data);
     }

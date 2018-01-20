@@ -95,7 +95,7 @@ class Member extends Model
 
     public function courses()
     {
-        return $this->belongsToMany('App\Models\Course')->withPivot('accepted', 'attendance');
+        return $this->belongsToMany('App\Models\Course')->withPivot('accepted');
     }
 
     public function coaches()
@@ -110,7 +110,7 @@ class Member extends Model
 
     public function courseClasses()
     {
-        return $this->belongsToMany(CourseClass::class)->withPivot('accepted', 'fixed');
+        return $this->belongsToMany(CourseClass::class)->withPivot('accepted', 'fixed', 'attendance');
     }
 
     public function attendedCourseClasses()
